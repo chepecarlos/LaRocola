@@ -1,5 +1,25 @@
 void Fondo() {
   background(240);
+  if (Reproduciendo) {
+    fft.analyze();
+    for (int i = 0; i < bands; i++) {
+      // smooth the FFT data by smoothing factor
+      sum[i] += (fft.spectrum[i] - sum[i]) * smooth_factor;
+      // draw the rects with a scale factor
+      rect( i*r_width, height, r_width, -sum[i]*height*scale );
+    }
+  }
+}
+
+void DibujarVolumen() {
+  fill(0);
+  rect(Ancho- 400, 20, 200, 60, 40);
+  fill(0, 255, 0);
+  float AnchoVolumen = map(Volumen, 0, 100, 0, 200);
+  rect(Ancho- 400, 20, AnchoVolumen, 60, 40);
+  textAlign(LEFT, CENTER);
+  fill(255);
+  text("Volumen: "+int(Volumen), Ancho- 380, 50);
 }
 
 void CantidadCreditos() {
