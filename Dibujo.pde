@@ -1,14 +1,6 @@
 void Fondo() {
   background(240);
-  if (Reproduciendo) {
-    fft.analyze();
-    for (int i = 0; i < bands; i++) {
-      // smooth the FFT data by smoothing factor
-      sum[i] += (fft.spectrum[i] - sum[i]) * smooth_factor;
-      // draw the rects with a scale factor
-      rect( i*r_width, height, r_width, -sum[i]*height*scale );
-    }
-  }
+  
 }
 
 void DibujarVolumen() {
