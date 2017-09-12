@@ -28,14 +28,14 @@ float Alto;
 //Cuanto fondos hay 
 float Saldo = 0;
 
-int Reproduciendo = 0;
+int EstadoReproducion = 0;
 
 void setup() {
   //size(1200, 600);
   fullScreen();
   Ancho =  width;
   Alto = height;
-
+  CancionesDespues = new ArrayList();
   RutaCanciones = sketchPath()+"/data";
 
   minim = new Minim(this);
@@ -52,29 +52,73 @@ void draw() {
   Nombre();
   CantidadCreditos();
   DibujarVolumen();
+  CambiarCansion();
 }
 
 void SubirVolumen(float Valor ) {
   Volumen = Volumen + Valor;
   Volumen = constrain(Volumen, 0, 100);
-  if ( Reproduciendo ==1) {
+  if ( EstadoReproducion ==1) {
     Player.setVolume(map(Volumen, 0, 100, 0, 1));
-  } else if ( Reproduciendo ==2) {
+  } else if ( EstadoReproducion ==2) {
     Pelicula.volume(map(Volumen, 0, 100, 0, 1));
   }
   println("Volumen Acutalizado a "+Volumen);
 }
 
 void RepducirVideo() {
-  Reproduciendo = 2;
+  EstadoReproducion = 2;
   Pelicula = new Movie(this, NombreCanciones[IDCancion]);
   Pelicula.volume(map(Volumen, 0, 100, 0, 1));
   Pelicula.play();
 }
 
 void RepducirAudio() {
-  Reproduciendo = 1;
+  EstadoReproducion = 1;
   Player = minim.loadFile(NombreCanciones[IDCancion]);
   Player.setVolume(map(Volumen, 0, 100, 0, 1));
   Player.play();
+}
+
+void  ReproducirMedia() {
+  println("Repoducir:"+NombreCanciones[IDCancion]);
+  String[] Tipo = split(NombreCanciones[IDCancion], ".");
+  println("Tipo : " + Tipo[Tipo.length-1]);
+  switch(Tipo[Tipo.length-1]) {
+  case "mp3":
+  case "MP3":
+    RepducirAudio();
+    Saldo = Saldo-1;
+    break;
+  case "mp4":
+    RepducirVideo();
+    break;
+  }
+}
+
+void CambiarCansion() {
+  if (EstadoReproducion == 1) {
+    if ( Player.position() == Player.length() ) {
+      IDCancion = (int)CancionesDespues.get(0);
+      CancionesDespues.remove(0);
+      println("siquiene Cansion de un musica");
+      ReproducirMedia();
+    }
+  }
+  if (EstadoReproducion == 2) {
+    float md = Pelicula.duration();
+    float mt = Pelicula.time();
+    if (mt == md) {
+      println("Repoduciendo Despues de Video"); 
+      if ( CancionesDespues.size() >0) {
+        IDCancion = (int)CancionesDespues.get(0);
+        CancionesDespues.remove(0);
+        println("siquiene Cansion de un video");
+        ReproducirMedia();
+      } else {
+        println("Termino Video");
+        EstadoReproducion = 0;
+      }
+    }
+  }
 }

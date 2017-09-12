@@ -30,25 +30,15 @@ void keyReleased() {
     SubirVolumen(5);
     break;
   case 'q':
-    if (Reproduciendo  == 0) {
-      println("Repoducir:"+NombreCanciones[IDCancion]);
-      String[] Tipo = split(NombreCanciones[IDCancion], ".");
-      Saldo = Saldo-1;
-      println("Tipo : " + Tipo[Tipo.length-1]);
-      switch(Tipo[Tipo.length-1]) {
-      case "mp3":
-      case "MP3":
-        RepducirAudio();
-        Saldo = Saldo-1;
-        break;
-      case "mp4":
-        RepducirVideo();
-        break;
-      }
+   Saldo = Saldo-1;
+    if (EstadoReproducion  == 0) {
+     println("Repoduciondo desde Apagado");
+     ReproducirMedia();
     } else {
-      println("Agregando para despues");
+      println("Agregando para despues:");
       int Valor = IDCancion;
       CancionesDespues.add(Valor);
+      printArray(CancionesDespues);
     }
     break;
   }
