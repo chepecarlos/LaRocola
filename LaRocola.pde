@@ -1,9 +1,14 @@
 //Libreria de Audio de processing
 import ddf.minim.*;
 import ddf.minim.effects.*;
+//Liberias de Video de processing
+import processing.video.*;
 
 //Objeto para Manejar Minin
 Minim minim; 
+
+//Objeto para manejar video
+Movie Pelicula;
 
 //Objeto para repducicir 
 AudioPlayer Player;
@@ -12,8 +17,7 @@ AudioPlayer Player;
 String RutaCanciones;
 //Nombre de las cansiones del folder
 String[] NombreCanciones;
-ArrayList Canciones;
-ArrayList Video;
+ArrayList CancionesDespues;
 //ID de la cansion actual
 int IDCancion = 0;
 //Valumen 0 - 100
@@ -23,16 +27,8 @@ float Ancho;
 float Alto;
 //Cuanto fondos hay 
 float Saldo = 0;
-//Graficos Fondo
-int bands = 64;
-float[] sum = new float[bands];
-int scale=5;
-float smooth_factor = 0.5;
-float r_width;
 
-
-
-boolean Reproduciendo = false;
+int Reproduciendo = 0;
 
 void setup() {
   //size(1200, 600);
@@ -42,11 +38,7 @@ void setup() {
 
   RutaCanciones = sketchPath()+"/data";
 
-
   minim = new Minim(this);
-  // Calculate the width of the rects depending on how many bands we have
-  r_width = width/float(bands);
-
 
   println("Lista de Canciones");
   NombreCanciones = ListaNombreArchivo(RutaCanciones);
@@ -56,6 +48,7 @@ void setup() {
 
 void draw() {
   Fondo();
+  ActualizarVideo();
   Nombre();
   CantidadCreditos();
   DibujarVolumen();
@@ -64,6 +57,24 @@ void draw() {
 void SubirVolumen(float Valor ) {
   Volumen = Volumen + Valor;
   Volumen = constrain(Volumen, 0, 100);
-  //ArchivoMusica.amp(map(Volumen, 0, 100, 0, 1));
+  if ( Reproduciendo ==1) {
+    Player.setVolume(map(Volumen, 0, 100, 0, 1));
+  } else if ( Reproduciendo ==2) {
+    Pelicula.volume(map(Volumen, 0, 100, 0, 1));
+  }
   println("Volumen Acutalizado a "+Volumen);
+}
+
+void RepducirVideo() {
+  Reproduciendo = 2;
+  Pelicula = new Movie(this, NombreCanciones[IDCancion]);
+  Pelicula.volume(map(Volumen, 0, 100, 0, 1));
+  Pelicula.play();
+}
+
+void RepducirAudio() {
+  Reproduciendo = 1;
+  Player = minim.loadFile(NombreCanciones[IDCancion]);
+  Player.setVolume(map(Volumen, 0, 100, 0, 1));
+  Player.play();
 }

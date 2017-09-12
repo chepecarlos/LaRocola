@@ -1,6 +1,5 @@
 void Fondo() {
-  background(240);
-  
+  //background(240);
 }
 
 void DibujarVolumen() {
@@ -57,5 +56,15 @@ void Nombre() {
       textSize(20);
       text(ListaMenu[i], 130, PosicionY);
     }
+  }
+}
+
+void ActualizarVideo() {
+  if (Reproduciendo == 2) {
+    Pelicula.read();
+    image(Pelicula, 0, 0, width, height);
+    float md = Pelicula.duration();
+    float mt = Pelicula.time();
+    println(mt + ":" + md);
   }
 }
