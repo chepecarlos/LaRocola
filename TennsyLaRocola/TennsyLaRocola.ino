@@ -1,34 +1,66 @@
-#define PinMoneda 14//A0 en Arduino  
+#include <Bounce.h>
+#define PinInterupcion 14 //A0
 
-int CantidadBotones = 6;
-int Botones[7] = {0, 1, 2, 3, 4, 5};
-char Letras[7] = {'e', 'd', 'w', 's', 'q', 'o'};
+Bounce button0 = Bounce(0, 10);
+Bounce button1 = Bounce(1, 10);
+Bounce button2 = Bounce(2, 10);
+Bounce button3 = Bounce(3, 10);
+Bounce button4 = Bounce(4, 10);
+Bounce button5 = Bounce(5, 10);
 
 void setup() {
 
-  Serial.begin(115200);
-  pinMode(PinMoneda, INPUT); // sets the digital pin as output
-  attachInterrupt(PinMoneda, Token, FALLING); // interrrupt 1 is data ready
-  for (int i = 0; i <= CantidadBotones; i++) {
-    pinMode(Botones[i], INPUT);
-  }
+  Serial.begin(9600);
+
+  pinMode(0, INPUT_PULLUP);
+  pinMode(1, INPUT_PULLUP);
+  pinMode(2, INPUT_PULLUP);
+  pinMode(3, INPUT_PULLUP);
+  pinMode(4, INPUT_PULLUP);
+  pinMode(5, INPUT_PULLUP);
+
+  pinMode(PinInterupcion, INPUT);
+
+  attachInterrupt(PinInterupcion, IngresarMoneda, FALLING);
 }
 
 void loop() {
-  for (int i = 0; i <= CantidadBotones; i++) {
-    if (digitalRead(Botones[i]) == 0) {
-      Keyboard.print(Letras[i]);
-      delay(500);
-      Serial.println(Letras[i]);
-    }
+  button0.update();
+  button1.update();
+  button2.update();
+  button3.update();
+  button4.update();
+  button5.update();
+
+  if (button0.fallingEdge()) {
+    Keyboard.press('w');
+    Keyboard.release('w');
+  }
+  if (button1.fallingEdge()) {
+    Keyboard.press('s');
+    Keyboard.release('s');
+  }
+  if (button2.fallingEdge()) {
+    Keyboard.press('e');
+    Keyboard.release('e');
+  }
+  if (button3.fallingEdge()) {
+    Keyboard.press('d');
+    Keyboard.release('d');
+  }
+  if (button4.fallingEdge()) {
+    Keyboard.press('q');
+    Keyboard.release('q');
+  }
+  if (button5.fallingEdge()) {
+    Keyboard.press('o');
+    Keyboard.release('o');
   }
 }
 
-void Token() {
+void IngresarMoneda() {
   cli();
   Keyboard.press('a');
-  delay(10);
   Keyboard.release('a');
-  Serial.println("Token");
   sei();
 }

@@ -13,6 +13,9 @@ Movie Pelicula;
 //Objeto para repducicir 
 AudioPlayer Player;
 
+boolean Dormir = true;
+float TiempoPasado  = 0;
+
 //Direcion de la musica
 String RutaCanciones;
 //Nombre de las cansiones del folder
@@ -53,6 +56,7 @@ void draw() {
   CantidadCreditos();
   DibujarVolumen();
   CambiarCansion();
+  Sueno();
 }
 
 void SubirVolumen(float Valor ) {
@@ -85,13 +89,12 @@ void  ReproducirMedia() {
   String[] Tipo = split(NombreCanciones[IDCancion], ".");
   println("Tipo : " + Tipo[Tipo.length-1]);
   switch(Tipo[Tipo.length-1]) {
-  case "mp3":
-  case "MP3":
-    RepducirAudio();
-    Saldo = Saldo-1;
-    break;
   case "mp4":
     RepducirVideo();
+    break;
+  default:
+    RepducirAudio();
+    Saldo = Saldo-1;
     break;
   }
 }
