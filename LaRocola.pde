@@ -34,8 +34,8 @@ float Saldo = 0;
 int EstadoReproducion = 0;
 
 void setup() {
-  //size(1200, 600);
-  fullScreen();
+  size(1200, 600,P2D);
+  //fullScreen();
   Ancho =  width;
   Alto = height;
   CancionesDespues = new ArrayList();

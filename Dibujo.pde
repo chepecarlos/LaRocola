@@ -5,6 +5,10 @@ void Fondo() {
     //Codigo
     background(240);
   }
+  else if(EstadoReproducion == 2){
+  
+  println(frameRate);
+  }
 }
 
 void DibujarVolumen() {
