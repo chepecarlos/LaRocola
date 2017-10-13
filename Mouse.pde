@@ -22,8 +22,11 @@ void keyReleased() {
       break;
     case 'o':
       //exec("shutdown","now");
-      Process p = exec("git", "pull","../");
-      println("prueva");
+      // Process p = exec("pwd");
+      //Process p = exec("git", "pull", "/home/chepecarlos/sketchbook/LaRocola/");
+      Process p = exec("python", "/home/chepecarlos/sketchbook/LaRocola/Actualizar.py");
+
+      println("Comado de actualicacion");
       try {
         int result = p.waitFor();
         String line;
