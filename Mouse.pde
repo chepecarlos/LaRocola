@@ -1,3 +1,4 @@
+import java.io.*;
 
 void keyReleased() {
   Dormir = false;
@@ -20,7 +21,22 @@ void keyReleased() {
       }
       break;
     case 'o':
-      exec("shutdown now");
+      //exec("shutdown","now");
+      Process p = exec("git", "pull","../");
+      println("prueva");
+      try {
+        int result = p.waitFor();
+        String line;
+        BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        while ( (line = input.readLine ()) != null) {
+          println("the process returned " + line);
+        }
+        input.close();
+      }
+      catch (Exception err) {
+        println("error comando");
+      }
+
       break;
     case 'p':
       println("Salir de la App");
