@@ -1,10 +1,17 @@
 
+#Sistemas implementados
 
-Problras a resolver
+* Sistema de listas
+* Buscador de Albunes
+* Sistema de Actualizaciones
 
-*  Lista null
-*  Sistema de Actualizacion con GIT 
-*  Mensaje de Update
+#Cosas a implementar
+
+* Probar Sistema de Actualizaciones
+* Vercion en pantalla
+* Hora en pantalla
+* Mensaje de Update
+* Portada Albun
 
 # Cosas a installar 
 

@@ -1,6 +1,5 @@
 PImage img;
 
-
 void Fondo() {
   Ancho =  width;
   Alto = height;

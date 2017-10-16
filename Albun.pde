@@ -12,7 +12,6 @@ class Pista {
 
   void TipoPista() {
     String[] Tipo = split(NombrePista, ".");
-    println("Tipo : " + Tipo[Tipo.length-1]);
     switch(Tipo[Tipo.length-1]) {
     case "mp4":
       EsAudio = false;
@@ -58,7 +57,7 @@ ArrayList<Albun> Biblioteca = new ArrayList<Albun>();
 void CargarAlbun(String Directorio) {
   File Archivos = new File(Directorio);
   if (Archivos.isDirectory()) {
-    println("\nListing info about all files in a directory and all subdirectories: ");
+    println("\nEmpezando a buscar Pistas dentro de Albunes");
     ArrayList<File> ListaDirectorios = listFilesRecursive(Directorio);
     for (File D : ListaDirectorios) {
       if (D.isDirectory()) {
@@ -67,10 +66,15 @@ void CargarAlbun(String Directorio) {
         println(" | " + D.getAbsolutePath());
       }
     }
-    //return names;
+    //Eliminando todo Albun sin canciones
+    for (int i = Biblioteca.size() -1; i > -1; i--) {
+      Albun  AlbunPrueva  = Biblioteca.get(i);
+      if (AlbunPrueva.CantidadPistas == 0) {
+        Biblioteca.remove(i);
+      }
+    }
+    println("Cantidad de Albunes "+ Biblioteca.size());
   } else {
-    //No es directorio
-    //return null;
+    println("No existe directorio");
   }
-  println("Cantidad de Albunes "+ Biblioteca.size());
 }
