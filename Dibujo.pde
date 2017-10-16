@@ -1,8 +1,14 @@
+PImage img;
+
+
 void Fondo() {
   Ancho =  width;
   Alto = height;
   if (EstadoReproducion == 0 ) {
-    background(240);
+    //background(240);
+    img = loadImage("fondo.png");
+    img.resize(int(Ancho),int(Alto));
+    background(img);
   } else if (   EstadoReproducion == 1) {
     //Codigo
     background(240);

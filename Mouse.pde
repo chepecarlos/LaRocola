@@ -23,6 +23,7 @@ void keyReleased() {
     case 'o':
       //exec("shutdown","now");
       // Process p = exec("pwd");
+      launch("python", "/home/chepecarlos/sketchbook/LaRocola/Actualizar.py");
       //Process p = exec("git", "pull", "/home/chepecarlos/sketchbook/LaRocola/");
       Process p = exec("python", "/home/chepecarlos/sketchbook/LaRocola/Actualizar.py");
 

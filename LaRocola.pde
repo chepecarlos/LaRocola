@@ -49,6 +49,7 @@ void setup() {
   NombreCanciones = ListaNombreArchivo(RutaCanciones);
   printArray(NombreCanciones);
   println("Cantidad de cansiones: "+ NombreCanciones.length);
+  CargarAlbun("/home/chepecarlos/Musica");
 }
 
 void draw() {
