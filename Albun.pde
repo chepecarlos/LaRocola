@@ -4,13 +4,18 @@ import ddf.minim.effects.*;
 //Liberias de Video de processing
 import processing.video.*;
 
+ArrayList<Albun> Biblioteca = new ArrayList<Albun>();
+ArrayList<Pista> ColaPista = new ArrayList<Pista>();
+
+Albun AlbunActual;
+Pista PistaActual;
 //Objeto para manejar video
 Movie Pelicula;
 
 //Objeto para repducicir 
 AudioPlayer Player;
 
-int[] PistaActual = {0, 0};
+int[] PunteroActual = {0, 0};
 
 class Pista {
   PImage ImagenPista;
@@ -64,6 +69,10 @@ class Albun {
     BuscarPista();
   }
 
+  Pista get(int i) {
+    return ListaPista.get(i);
+  }
+
   void BuscarPista() {
     File[] ListaArchivos = listFiles(DirecionAlbun);
     for (int i = 0; i<ListaArchivos.length; i++) {
@@ -79,8 +88,6 @@ class Albun {
   }
 }
 
-ArrayList<Albun> Biblioteca = new ArrayList<Albun>();
-ArrayList<Pista> ColaPista = new ArrayList<Pista>();
 
 void CargarAlbun(String Directorio) {
   File Archivos = new File(Directorio);
@@ -102,6 +109,8 @@ void CargarAlbun(String Directorio) {
       }
     }
     println("Cantidad de Albunes "+ Biblioteca.size());
+    AlbunActual = Biblioteca.get(0);
+    println("Cantidad de Pistas "+ AlbunActual.CantidadPistas);
   } else {
     println("No existe directorio/Intenta de nuevo");
   }

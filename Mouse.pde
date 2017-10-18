@@ -3,7 +3,7 @@ import java.io.*;
 void keyReleased() {
   Dormir = false;
   TiempoPasado = millis();
-  if (key == 'a') {
+  if (key == 'q') {
     ActualizarSaldo();
   } else if (Saldo > 0) {
     if (key == CODED) {
@@ -16,11 +16,11 @@ void keyReleased() {
         println("Bajar Pista");
         BajarPista();
         break;
-      case LEFT:
+      case RIGHT:
         println("Subir Albun");
         SubirAlbun();
         break;
-      case RIGHT:
+      case LEFT:
         println("Bajar Albun");
         BajarAlbun();
         break;
@@ -65,15 +65,40 @@ void keyReleased() {
 }
 
 void SubirPista() {
+  PunteroActual[1]++;
+  if (PunteroActual[1]> AlbunActual.CantidadPistas -1) {
+    PunteroActual[1] = 0;
+  }
+  PistaActual = AlbunActual.get( PunteroActual[1]);
+  println("Pista Actual "+PunteroActual[1]+":"+PistaActual.NombrePista);
 }
 
 void BajarPista() {
+  PunteroActual[1]--;
+  if (PunteroActual[1] < 0) {
+    PunteroActual[1] =  AlbunActual.CantidadPistas -1;
+  }
+  println("Pista Actual "+PunteroActual[1]+":"+PistaActual.NombrePista);
 }
 
 void SubirAlbun() {
+  PunteroActual[0]++; 
+  if (PunteroActual[0] > Biblioteca.size() - 1) {
+    PunteroActual[0] = 0;
+  }
+  AlbunActual = Biblioteca.get(PunteroActual[0]);
+  PunteroActual[1] = 0;
+  println("Menu Albun "+PunteroActual[0]+":"+AlbunActual.NombreAlbun);
 }
 
 void BajarAlbun() {
+  PunteroActual[0]--; 
+  if (PunteroActual[0] < 0) {
+    PunteroActual[0] = Biblioteca.size() - 1;
+  }
+  AlbunActual = Biblioteca.get(PunteroActual[0]);
+  PunteroActual[1] = 0;
+  println("Menu Albun "+PunteroActual[0]+":"+AlbunActual.NombreAlbun);
 }
 
 void ActualizarSaldo() {
