@@ -7,12 +7,6 @@ import processing.video.*;
 //Objeto para Manejar Minin
 Minim minim; 
 
-//Objeto para manejar video
-Movie Pelicula;
-
-//Objeto para repducicir 
-AudioPlayer Player;
-
 boolean Dormir = true;
 float TiempoPasado  = 0;
 

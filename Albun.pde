@@ -1,12 +1,28 @@
+//Libreria de Audio de processing
+import ddf.minim.*;
+import ddf.minim.effects.*;
+//Liberias de Video de processing
+import processing.video.*;
+
+//Objeto para manejar video
+Movie Pelicula;
+
+//Objeto para repducicir 
+AudioPlayer Player;
+
+int[] PistaActual = {0, 0};
+
 class Pista {
   PImage ImagenPista;
   String NombrePista;
   String DirecionPista;
   boolean EsAudio;
+  boolean Reproduciendo;
 
   Pista(String Nombre, String Direcion) {
     DirecionPista = Direcion;
     NombrePista = Nombre;
+    Reproduciendo = false;
     TipoPista();
   }
 
@@ -21,6 +37,16 @@ class Pista {
       break;
     }
   }
+
+  void Reproducir() {
+    if (EsAudio) {
+      println("Reproducir Audio");
+      ReproducirAudio();
+    } else {
+      println("Reproducir Video");
+      ReproducirVideo(DirecionPista);
+    }
+  }
 }
 
 class Albun {
@@ -30,6 +56,7 @@ class Albun {
 
   ArrayList<Pista> ListaPista = new ArrayList<Pista>();
 
+  //Contructor del albun 
   Albun(String Nombre, String Direcion) {
     NombreAlbun = Nombre;
     DirecionAlbun = Direcion;
@@ -53,6 +80,7 @@ class Albun {
 }
 
 ArrayList<Albun> Biblioteca = new ArrayList<Albun>();
+ArrayList<Pista> ColaPista = new ArrayList<Pista>();
 
 void CargarAlbun(String Directorio) {
   File Archivos = new File(Directorio);
@@ -75,6 +103,6 @@ void CargarAlbun(String Directorio) {
     }
     println("Cantidad de Albunes "+ Biblioteca.size());
   } else {
-    println("No existe directorio");
+    println("No existe directorio/Intenta de nuevo");
   }
 }

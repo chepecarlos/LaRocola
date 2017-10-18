@@ -4,10 +4,8 @@ void  ReproducirMedia() {
   println("Tipo : " + Tipo[Tipo.length-1]);
   switch(Tipo[Tipo.length-1]) {
   case "mp4":
-    RepducirVideo();
     break;
   default:
-    RepducirAudio();
     break;
   }
 }
