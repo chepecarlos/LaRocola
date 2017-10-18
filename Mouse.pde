@@ -1,9 +1,23 @@
 import java.io.*;
 
+/*
+* Control Teclado
+ * q o Q -> Subir Saldo
+ * UP o a -> Subir Lista
+ * DONW o z -> Bajar Lista
+ * RIGHT o s -> Subir Albun
+ * LEFT o X -> Bajar Albun
+ * o -> Actualizar Git
+ * p -> Apagar PC
+ * f -> Subir Volumen
+ * v -> Bajar Volumen 
+ * w -> Reproducir Pista
+ */
+
 void keyReleased() {
   Dormir = false;
   TiempoPasado = millis();
-  if (key == 'q') {
+  if (key == 'q' || key == 'Q') {
     ActualizarSaldo();
   } else if (Saldo > 0) {
     if (key == CODED) {
@@ -28,36 +42,45 @@ void keyReleased() {
     }
     switch(key) {
     case 'a':
+    case 'A':
       println("Subir Pista");
       SubirPista();
       break;
     case 'z':
+    case 'Z':
       println("Bajar Pista");
       BajarPista();
       break;
     case 's':
+    case 'S':
       println("Subir Albun");
       SubirAlbun();
       break;
     case 'x':
+    case 'X':
       println("Bajar Albun");
       BajarAlbun();
       break;
     case 'o'://Ejecutar Actualizacion
+    case 'O':
       println("Actualizar GIT");
       EjecutarActualizacion();
       break;
     case 'p'://Apagar la PC
+    case 'P':
       println("Apagar la PC");
       ApagarPC();
       break;
-    case 'w':
-      SubirVolumen(-5);
-      break;
     case 'f':
+    case 'F':
       SubirVolumen(5);
       break;
-    case 'v'://Reproducir Pista
+    case 'v':
+    case 'V':
+      SubirVolumen(-5);
+      break;
+    case 'w'://Reproducir Pista
+    case 'W':
       ReproducirPista();
       break;
     }
@@ -78,6 +101,7 @@ void BajarPista() {
   if (PunteroActual[1] < 0) {
     PunteroActual[1] =  AlbunActual.CantidadPistas -1;
   }
+  PistaActual = AlbunActual.get( PunteroActual[1]);
   println("Pista Actual "+PunteroActual[1]+":"+PistaActual.NombrePista);
 }
 
