@@ -1,4 +1,4 @@
-//Libreria de Audio de processing
+//Libreria de Audio de processing //<>// //<>//
 import ddf.minim.*;
 import ddf.minim.effects.*;
 //Liberias de Video de processing
@@ -9,6 +9,7 @@ ArrayList<Pista> ColaPista = new ArrayList<Pista>();
 
 Albun AlbunActual;
 Pista PistaActual;
+
 //Objeto para manejar video
 Movie Pelicula;
 
@@ -29,6 +30,11 @@ class Pista {
     NombrePista = Nombre;
     Reproduciendo = false;
     TipoPista();
+    CargarImagen();
+  }
+
+  void CargarImagen() {
+    //ImagenPista = loadImage("Albun.jpg");
   }
 
   void TipoPista() {
@@ -76,13 +82,32 @@ class Albun {
   void BuscarPista() {
     File[] ListaArchivos = listFiles(DirecionAlbun);
     for (int i = 0; i<ListaArchivos.length; i++) {
-      print(">>");
+      boolean EsPista = false;
       File Pista = ListaArchivos[i]; 
       if (!Pista.isDirectory()) {
-        print("Cancion: " + Pista.getName());
-        println(" | " + Pista.getAbsolutePath());
-        ListaPista.add(new Pista(Pista.getName(), Pista.getAbsolutePath()));
-        CantidadPistas++;
+        String[] Tipo = split(Pista.getName(), ".");
+        switch(Tipo[Tipo.length-1]) {
+        case "mp4":
+        case "MP4":
+        case "mp3":
+        case "MP3":
+        case "wav":
+        case "WAV":
+        case "au":
+        case "AU":
+          EsPista = true;
+          break;
+        default:
+          EsPista= false;
+          break;
+        }
+        if (EsPista) {
+          print(">>");
+          print("Cancion: " + Pista.getName());
+          println(" | " + Pista.getAbsolutePath());
+          ListaPista.add(new Pista(Pista.getName(), Pista.getAbsolutePath()));
+          CantidadPistas++;
+        }
       }
     }
   }
@@ -108,8 +133,10 @@ void CargarAlbun(String Directorio) {
         Biblioteca.remove(i);
       }
     }
-    println("Cantidad de Albunes "+ Biblioteca.size());
     AlbunActual = Biblioteca.get(0);
+    PistaActual = AlbunActual.get(0);
+    println("Dencidad Actual "+displayDensity());
+    println("Cantidad de Albunes "+ Biblioteca.size());
     println("Cantidad de Pistas "+ AlbunActual.CantidadPistas);
   } else {
     println("No existe directorio/Intenta de nuevo");

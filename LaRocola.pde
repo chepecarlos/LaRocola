@@ -28,7 +28,8 @@ float Saldo = 0;
 int EstadoReproducion = 0;
 
 void setup() {
-  size(1200, 600, P2D);
+  //size(1200, 600, P2D);
+  size(600, 300, P2D);
 
   surface.setResizable(true);
   //fullScreen();
@@ -47,8 +48,11 @@ void setup() {
 }
 
 void draw() {
+  // float R = float(pixelWidth)/float(pixelHeight) ;
+  // println("w:"+pixelWidth+" H:"+pixelHeight+" R:"+ R);  
   Fondo();
   Nombre();
+  DibujarAlbunes();
   CantidadCreditos();
   DibujarVolumen();
   CambiarMedia();

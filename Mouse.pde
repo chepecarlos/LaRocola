@@ -90,7 +90,7 @@ void keyReleased() {
 void SubirPista() {
   PunteroActual[1]++;
   if (PunteroActual[1]> AlbunActual.CantidadPistas -1) {
-    PunteroActual[1] = 0;
+    PunteroActual[1]--;
   }
   PistaActual = AlbunActual.get( PunteroActual[1]);
   println("Pista Actual "+PunteroActual[1]+":"+PistaActual.NombrePista);
@@ -99,7 +99,7 @@ void SubirPista() {
 void BajarPista() {
   PunteroActual[1]--;
   if (PunteroActual[1] < 0) {
-    PunteroActual[1] =  AlbunActual.CantidadPistas -1;
+    PunteroActual[1] ++;
   }
   PistaActual = AlbunActual.get( PunteroActual[1]);
   println("Pista Actual "+PunteroActual[1]+":"+PistaActual.NombrePista);
@@ -108,7 +108,7 @@ void BajarPista() {
 void SubirAlbun() {
   PunteroActual[0]++; 
   if (PunteroActual[0] > Biblioteca.size() - 1) {
-    PunteroActual[0] = 0;
+    PunteroActual[0]--;
   }
   AlbunActual = Biblioteca.get(PunteroActual[0]);
   PunteroActual[1] = 0;
@@ -118,9 +118,11 @@ void SubirAlbun() {
 void BajarAlbun() {
   PunteroActual[0]--; 
   if (PunteroActual[0] < 0) {
-    PunteroActual[0] = Biblioteca.size() - 1;
+    PunteroActual[0]++;
   }
+  else{
   AlbunActual = Biblioteca.get(PunteroActual[0]);
+  }
   PunteroActual[1] = 0;
   println("Menu Albun "+PunteroActual[0]+":"+AlbunActual.NombreAlbun);
 }
@@ -131,23 +133,31 @@ void ActualizarSaldo() {
 }
 
 void ReproducirPista() {
+  ColaPista.add(PistaActual);
+  println("Agregar la lista "+ColaPista.size()+":"+PistaActual.NombrePista);
+  /*
   if ( ColaPista.size() > 0) {
-    Saldo = Saldo - 1;
-    Pista PistaActual = ColaPista.get(0);
-    PistaActual.Reproducir();
-  }
-  if (EstadoReproducion  == 0) {
-    println("Repoduciondo desde Apagado");
-    ReproducirMedia();
-  } else {
-    println("Agregando para despues:");
-    int Valor = IDCancion;
-    CancionesDespues.add(Valor);
-    printArray(CancionesDespues);
-  }
+   Saldo = Saldo - 1;
+   Pista PistaActual = ColaPista.get(0);
+   PistaActual.Reproducir();
+   } else {
+   println("No hay Pista a repoducir");
+   }
+   
+   if (EstadoReproducion  == 0) {
+   println("Repoduciondo desde Apagado");
+   ReproducirMedia();
+   } else {
+   println("Agregando para despues:");
+   int Valor = IDCancion;
+   CancionesDespues.add(Valor);
+   printArray(CancionesDespues);
+   }
+   */
 }
 
 void ApagarPC() {
+  println("Apagar PC");
   exec("shutdown", "now");
 }
 
