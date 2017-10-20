@@ -1,5 +1,6 @@
-PImage img;
-int[] IndiceAlbun = {0, 10};
+PImage img; //<>//
+int[] IndiceAlbun = {0, 0};
+
 void Fondo() {
   Ancho =  width;
   Alto = height;
@@ -21,7 +22,7 @@ void DibujarAlbunes() {
   float AnchoAlbunes = Alto*0.56;
   float AnchoCelda = AnchoAlbunes/10;
   int TamanoFunte = int(AnchoCelda -AnchoCelda/10);
-  pushStyle();
+
   pushMatrix();
   textSize(TamanoFunte);
   textAlign(LEFT, TOP);
@@ -47,10 +48,65 @@ void DibujarAlbunes() {
     text(NombreAlbun, AnchoAlbunes/20, AnchoCelda*i);
     Indice++;
     if (Indice >= Biblioteca.size() ) {
+      popMatrix();
       return;
     }
   }
-  popStyle();
+  popMatrix();
+}
+
+void DibujarLista() {
+  float AnchoAlbunes = Alto*0.56;
+  float AnchoCelda = AnchoAlbunes/10;
+  int TamanoFunte = int(AnchoCelda -AnchoCelda/10);
+  pushMatrix();
+  textSize(TamanoFunte);
+  textAlign(LEFT, TOP);
+  fill(18, 10, 60);
+  translate( 3*Ancho/4, Alto - AnchoAlbunes);
+  rect(0, 0, Ancho/4, AnchoAlbunes);
+  if (ColaPista.size()> 0) {
+    for (int i = 0; i< 10; i++) {
+      if (ColaPista.size() > i ) {
+        ColaPista.get(i);
+      }
+    }
+  }
+  popMatrix();
+}
+
+
+void DibujarPistas() {
+  float AnchoAlbunes = Alto*0.56;
+  float AnchoCelda = AnchoAlbunes/10;
+  int TamanoFunte = int(AnchoCelda -AnchoCelda/10);
+  pushMatrix();
+  textSize(TamanoFunte);
+  textAlign(LEFT, TOP);
+  fill(231);
+  translate( Ancho/2, Alto - AnchoAlbunes);
+  rect(0, 0, Ancho/4, AnchoAlbunes);
+  fill(0);
+  if (PunteroActual[1] >=IndiceAlbun[1] +10 ) {
+    IndiceAlbun[1] ++;
+  } else if (PunteroActual[1] <IndiceAlbun[1] ) {
+    IndiceAlbun[1] --;
+  }
+  int Indice = IndiceAlbun[1];
+  for (int i = 0; i< 10; i++) {
+    String NombrePista = AlbunActual.get(Indice).NombrePista;
+    if (Indice == PunteroActual[1]) {
+      fill(226, 117, 15);
+      rect(0, i*AnchoCelda, Ancho/4, AnchoCelda);
+    } 
+    fill(0);
+    text(NombrePista, AnchoAlbunes/20, AnchoCelda*i);
+    Indice++;
+    if (Indice >= AlbunActual.CantidadPistas ) {
+      popMatrix();
+      return;
+    }
+  }
   popMatrix();
 }
 
@@ -67,7 +123,6 @@ void DibujarVolumen() {
 
 void CantidadCreditos() {
   int TamanoFunte = int(Alto/15);
-  pushStyle();
   pushMatrix();
   textSize(TamanoFunte);
   textAlign(LEFT, TOP);
@@ -80,11 +135,10 @@ void CantidadCreditos() {
   translate( Ancho/8, 0);
   fill(216, 5, 90);
   rect(0, 0, Ancho/8, Alto/15);
-  float TiempoFaltante = 1.30;
+  float TiempoFaltante = frameRate;
   fill(0);
   text(TiempoFaltante, 0, 0);
   popMatrix();
-  popStyle();
 }
 
 void Nombre() {

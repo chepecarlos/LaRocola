@@ -112,6 +112,7 @@ void SubirAlbun() {
   }
   AlbunActual = Biblioteca.get(PunteroActual[0]);
   PunteroActual[1] = 0;
+  IndiceAlbun[1] = 0;
   println("Menu Albun "+PunteroActual[0]+":"+AlbunActual.NombreAlbun);
 }
 
@@ -119,11 +120,11 @@ void BajarAlbun() {
   PunteroActual[0]--; 
   if (PunteroActual[0] < 0) {
     PunteroActual[0]++;
-  }
-  else{
-  AlbunActual = Biblioteca.get(PunteroActual[0]);
+  } else {
+    AlbunActual = Biblioteca.get(PunteroActual[0]);
   }
   PunteroActual[1] = 0;
+  IndiceAlbun[1] = 0;
   println("Menu Albun "+PunteroActual[0]+":"+AlbunActual.NombreAlbun);
 }
 

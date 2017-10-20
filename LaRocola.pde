@@ -23,7 +23,7 @@ float  Volumen = 50;
 float Ancho;
 float Alto;
 //Cuanto fondos hay 
-float Saldo = 0;
+float Saldo = 1;
 
 int EstadoReproducion = 0;
 
@@ -53,8 +53,10 @@ void draw() {
   Fondo();
   Nombre();
   DibujarAlbunes();
+  DibujarPistas();
+  DibujarLista();
   CantidadCreditos();
-  DibujarVolumen();
+  //DibujarVolumen();
   CambiarMedia();
   Sueno();
 }
