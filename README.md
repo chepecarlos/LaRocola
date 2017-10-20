@@ -25,3 +25,7 @@
 * sudo apt-get update
 * sudo apt-get install git python-pip 
 * pip install GitPython
+
+* Comando para ejecutar
+* /home/chepecarlos/processing/processing-java --sketch=/home/chepecarlos/sketchbook/LaRocola/ --present 
+
