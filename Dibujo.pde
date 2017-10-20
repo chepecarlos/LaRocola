@@ -65,10 +65,12 @@ void DibujarLista() {
   fill(18, 10, 60);
   translate( 3*Ancho/4, Alto - AnchoAlbunes);
   rect(0, 0, Ancho/4, AnchoAlbunes);
+  fill(100, 100, 100);
   if (ColaPista.size()> 0) {
     for (int i = 0; i< 10; i++) {
       if (ColaPista.size() > i ) {
         Pista PistaActual = ColaPista.get(i);
+        text(PistaActual.NombrePista, 0, AnchoCelda*i);
         println(PistaActual.NombrePista);
       }
     }
@@ -143,32 +145,32 @@ void CantidadCreditos() {
 }
 /*
 void Nombre() {
-  if (!Dormir) {
-    int CantidadLista = 9;
-    ArrayList ListaMedia = new ArrayList();
-    for (int i = 0; i< CantidadLista; i++) {
-      int n = i + IDCancion - CantidadLista/2;
-      if ( n > NombreCanciones.length -1 ) {
-        n = n - NombreCanciones.length  ;
-      } else if ( n < 0) {
-        n = NombreCanciones.length + n;
-      }
-      ListaMedia.add(n);
-    }
-    //println(ListaMedia);
-    float Inicio = Alto/8;
-    float Final = Alto - Inicio;
-    for (int i =0; i<10; i++) {
-      float PosicionY = map(i, 0, CantidadLista, Inicio, Final);
-      fill(0);
-      textAlign(LEFT, CENTER);
-      textSize(50);
-      //text("#"+ListaMedia.get(i), 20, PosicionY);
-      textSize(20);
-    }
-  }
-}
-*/
+ if (!Dormir) {
+ int CantidadLista = 9;
+ ArrayList ListaMedia = new ArrayList();
+ for (int i = 0; i< CantidadLista; i++) {
+ int n = i + IDCancion - CantidadLista/2;
+ if ( n > NombreCanciones.length -1 ) {
+ n = n - NombreCanciones.length  ;
+ } else if ( n < 0) {
+ n = NombreCanciones.length + n;
+ }
+ ListaMedia.add(n);
+ }
+ //println(ListaMedia);
+ float Inicio = Alto/8;
+ float Final = Alto - Inicio;
+ for (int i =0; i<10; i++) {
+ float PosicionY = map(i, 0, CantidadLista, Inicio, Final);
+ fill(0);
+ textAlign(LEFT, CENTER);
+ textSize(50);
+ //text("#"+ListaMedia.get(i), 20, PosicionY);
+ textSize(20);
+ }
+ }
+ }
+ */
 void ActualizarVideo() {
   if (EstadoReproducion == 2) {
     Pelicula.read();
