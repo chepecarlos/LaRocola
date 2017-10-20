@@ -29,10 +29,10 @@ int EstadoReproducion = 0;
 
 void setup() {
   //size(1200, 600, P2D);
-  size(600, 300, P2D);
+  //size(600, 300, P2D);
 
-  surface.setResizable(true);
-  //fullScreen();
+  //surface.setResizable(true);
+  fullScreen();
   Ancho =  width;
   Alto = height;
   CancionesDespues = new ArrayList();

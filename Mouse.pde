@@ -1,8 +1,9 @@
 import java.io.*;
 
 /*
-* Control Teclado
+ * Control Teclado
  * q o Q -> Subir Saldo
+ * w o W-> Reproducir Pista
  * UP o a -> Subir Lista
  * DONW o z -> Bajar Lista
  * RIGHT o s -> Subir Albun
@@ -11,7 +12,6 @@ import java.io.*;
  * p -> Apagar PC
  * f -> Subir Volumen
  * v -> Bajar Volumen 
- * w -> Reproducir Pista
  */
 
 void keyReleased() {
