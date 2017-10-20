@@ -57,9 +57,30 @@ class Pista {
       println("Reproducir Video");
       ReproducirVideo(DirecionPista);
     }
+    Reproduciendo = true;
+  }
+
+  boolean Termino() {
+    if (EsAudio) {
+      if ( abs(Player.position() -Player.length() ) < 100) {
+        return true;
+      }
+    } else {
+      if (abs( Pelicula.duration() - Pelicula.time()) < 100) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  float TiempoFalta() {
+    if (EsAudio) {
+      return Player.length()-Player.position();
+    } else {
+      return Pelicula.time()-Pelicula.duration();
+    }
   }
 }
-
 class Albun {
   int CantidadPistas;
   String NombreAlbun;
