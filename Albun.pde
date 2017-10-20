@@ -52,7 +52,7 @@ class Pista {
   void Reproducir() {
     if (EsAudio) {
       println("Reproducir Audio");
-      ReproducirAudio();
+      ReproducirAudio(DirecionPista);
     } else {
       println("Reproducir Video");
       ReproducirVideo(DirecionPista);

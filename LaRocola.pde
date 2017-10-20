@@ -57,8 +57,8 @@ void draw() {
   DibujarLista();
   CantidadCreditos();
   //DibujarVolumen();
-  CambiarMedia();
-  Sueno();
+  CambiarPista();
+  //Sueno();
 }
 
 void SubirVolumen(float Valor ) {

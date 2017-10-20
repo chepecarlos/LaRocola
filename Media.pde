@@ -10,6 +10,16 @@ void  ReproducirMedia() {
   }
 }
 
+void CambiarPista() {
+  if (ColaPista.size() > 0) {
+    Pista PistaActual = ColaPista.get(0);
+    if (!PistaActual.Reproduciendo) {
+      PistaActual.Reproducir();
+    }
+  }
+}
+
+
 void CambiarMedia() {
   if (EstadoReproducion == 1) {
     if ( Player.position() == Player.length() ) {

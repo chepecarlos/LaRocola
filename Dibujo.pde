@@ -71,7 +71,6 @@ void DibujarLista() {
       if (ColaPista.size() > i ) {
         Pista PistaActual = ColaPista.get(i);
         text(PistaActual.NombrePista, 0, AnchoCelda*i);
-        println(PistaActual.NombrePista);
       }
     }
   }
