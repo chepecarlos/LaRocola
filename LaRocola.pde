@@ -40,10 +40,10 @@ void setup() {
 
   minim = new Minim(this);
 
-  println("Lista de Canciones");
-  NombreCanciones = ListaNombreArchivo(RutaCanciones);
-  printArray(NombreCanciones);
-  println("Cantidad de cansiones: "+ NombreCanciones.length);
+  // println("Lista de Canciones");
+  //NombreCanciones = ListaNombreArchivo(RutaCanciones);
+  //printArray(NombreCanciones);
+  //println("Cantidad de cansiones: "+ NombreCanciones.length);
   CargarAlbun("/home/chepecarlos/Musica");
 }
 

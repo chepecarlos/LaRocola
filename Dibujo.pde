@@ -5,10 +5,10 @@ void Fondo() {
   Ancho =  width;
   Alto = height;
   if (EstadoReproducion == 0 ) {
-    //background(240);
-    img = loadImage("fondo.png");
-    img.resize(int(Ancho), int(Alto));
-    background(img);
+    background(240);
+    //img = loadImage("fondo.png");
+    //img.resize(int(Ancho), int(Alto));
+    //background(img);
   } else if (   EstadoReproducion == 1) {
     //Codigo
     background(240);
@@ -68,7 +68,8 @@ void DibujarLista() {
   if (ColaPista.size()> 0) {
     for (int i = 0; i< 10; i++) {
       if (ColaPista.size() > i ) {
-        ColaPista.get(i);
+        Pista PistaActual = ColaPista.get(i);
+        println(PistaActual.NombrePista);
       }
     }
   }
