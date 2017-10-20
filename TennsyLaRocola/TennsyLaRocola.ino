@@ -1,66 +1,63 @@
 #include <Bounce.h>
 #define PinInterupcion 14 //A0
 
-Bounce button0 = Bounce(0, 10);
-Bounce button1 = Bounce(1, 10);
-Bounce button2 = Bounce(2, 10);
-Bounce button3 = Bounce(3, 10);
-Bounce button4 = Bounce(4, 10);
-Bounce button5 = Bounce(5, 10);
+// Q - Saldo
+Bounce Reproducir = Bounce(0, 10);    // w - Reproducir
+Bounce SubirLista = Bounce(1, 10);    // a - Subir Lista
+Bounce BajarLista = Bounce(2, 10);    // z - Bajar Lista
+Bounce SubirAlbun = Bounce(3, 10);    // s - Subir Albun
+Bounce BajarAlbun = Bounce(4, 10);    // x - Bajar Albun
+Bounce ActualizarGit = Bounce(5, 10); // o - Actualizar
+Bounce ApagarPC = Bounce(6, 10);      // p - Apagar PC
+Bounce SubirVolumen = Bounce(7, 10);  // f - Subir Volumen
+Bounce BajarVolumen = Bounce(8, 10);  // v - Bajar Volume
 
 void setup() {
 
   Serial.begin(9600);
 
-  pinMode(0, INPUT_PULLUP);
-  pinMode(1, INPUT_PULLUP);
-  pinMode(2, INPUT_PULLUP);
-  pinMode(3, INPUT_PULLUP);
-  pinMode(4, INPUT_PULLUP);
-  pinMode(5, INPUT_PULLUP);
+  for (int i = 0; i < 9; i++) {
+    pinMode(i, INPUT_PULLUP);
+  }
 
   pinMode(PinInterupcion, INPUT);
-
   attachInterrupt(PinInterupcion, IngresarMoneda, FALLING);
+
 }
 
 void loop() {
-  button0.update();
-  button1.update();
-  button2.update();
-  button3.update();
-  button4.update();
-  button5.update();
+  Reproducir.update();
+  SubirLista.update();
+  BajarLista.update();
+  SubirAlbun.update();
+  BajarAlbun.update();
+  ActualizarGit.update();
+  ApagarPC.update();
+  SubirVolumen.update();
+  BajarVolumen.update();
 
-  if (button0.fallingEdge()) {
-    Keyboard.press('w');
-    Keyboard.release('w');
-  }
-  if (button1.fallingEdge()) {
-    Keyboard.press('s');
-    Keyboard.release('s');
-  }
-  if (button2.fallingEdge()) {
-    Keyboard.press('e');
-    Keyboard.release('e');
-  }
-  if (button3.fallingEdge()) {
-    Keyboard.press('d');
-    Keyboard.release('d');
-  }
-  if (button4.fallingEdge()) {
-    Keyboard.press('q');
-    Keyboard.release('q');
-  }
-  if (button5.fallingEdge()) {
-    Keyboard.press('o');
-    Keyboard.release('o');
+  PrecionarTecla( Reproducir, 'w');
+  PrecionarTecla( SubirLista, 'a');
+  PrecionarTecla( BajarLista, 'z');
+  PrecionarTecla( SubirAlbun, 's');
+  PrecionarTecla( BajarAlbun, 'x');
+  PrecionarTecla( ActualizarGit, 'o');
+  PrecionarTecla( ApagarPC, 'p');
+  PrecionarTecla( SubirVolumen, 'f');
+  PrecionarTecla( BajarVolumen, 'v');
+
+}
+
+void PrecionarTecla(Bounce Boton, char Letra) {
+  if (Boton.fallingEdge()) {
+    Keyboard.press(Letra);
+    Keyboard.release(Letra);
   }
 }
 
 void IngresarMoneda() {
   cli();
-  Keyboard.press('a');
-  Keyboard.release('a');
+  Keyboard.press('q');
+  Keyboard.release('q');
   sei();
 }
