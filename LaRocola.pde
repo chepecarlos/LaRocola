@@ -51,7 +51,7 @@ void draw() {
   // float R = float(pixelWidth)/float(pixelHeight) ;
   // println("w:"+pixelWidth+" H:"+pixelHeight+" R:"+ R);  
   Fondo();
-  Nombre();
+  //Nombre();
   DibujarAlbunes();
   DibujarPistas();
   DibujarLista();

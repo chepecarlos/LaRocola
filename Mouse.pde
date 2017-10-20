@@ -65,6 +65,7 @@ void keyReleased() {
     case 'O':
       println("Actualizar GIT");
       EjecutarActualizacion();
+      ApagarPC();
       break;
     case 'p'://Apagar la PC
     case 'P':
