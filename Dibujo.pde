@@ -141,7 +141,7 @@ void CantidadCreditos() {
   text(TiempoFaltante, 0, 0);
   popMatrix();
 }
-
+/*
 void Nombre() {
   if (!Dormir) {
     int CantidadLista = 9;
@@ -168,7 +168,7 @@ void Nombre() {
     }
   }
 }
-
+*/
 void ActualizarVideo() {
   if (EstadoReproducion == 2) {
     Pelicula.read();
