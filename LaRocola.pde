@@ -22,10 +22,17 @@ float Saldo = 1;
 int EstadoReproducion = 0;
 PFont FuentaSimple;
 
+PFont FuenteIndice;
+PFont FuenteAlbun;
+
 void setup() {
   size(1200, 600, P2D);
   //size(600, 300, P2D);
   surface.setResizable(true);
+
+  FuenteIndice =  createFont("Anton.ttf", 100);
+  FuenteAlbun  = createFont("Ubuntu-L.ttf", 100);
+
   // fullScreen();
   // Ancho =  width;
   // Alto = height;

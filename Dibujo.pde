@@ -22,9 +22,7 @@ void DibujarAlbunes() {
   float AnchoAlbunes = Alto*0.525;
   float AnchoCelda = AnchoAlbunes*(0.1);
   int TamanoFunte = int(AnchoCelda - AnchoCelda/10);
-  String Texto = "Ubuntu-L.ttf";
-  PFont Demo = createFont(Texto, TamanoFunte);
-  textFont(Demo);
+  textFont(FuenteAlbun);
   pushMatrix();
   textSize(TamanoFunte);
   textAlign(LEFT, TOP);
@@ -44,6 +42,10 @@ void DibujarAlbunes() {
       fill(255);
     } else {
       fill(46);
+    }
+    NombreAlbun = NombreAlbun.toLowerCase();
+    if (NombreAlbun.length() > 20 ) {
+      NombreAlbun  = NombreAlbun.substring(0, 20)+"...";
     }
     text(" "+NombreAlbun, 0, AnchoCelda*i);
     Indice++;
@@ -79,30 +81,31 @@ void DibujarLista() {
 
 
 void DibujarPistas() {
-  float AnchoAlbunes = Alto*0.56;
-  float AnchoCelda = AnchoAlbunes/10;
+  float AnchoAlbunes = Alto*0.51;
+  float AnchoAlbun = Ancho*0.222;
+  float AnchoCelda = AnchoAlbunes*0.10;
   int TamanoFunte = int(AnchoCelda -AnchoCelda/10);
   pushMatrix();
   textSize(TamanoFunte);
   textAlign(LEFT, TOP);
   fill(231);
-  translate( Ancho/2, Alto - AnchoAlbunes);
-  rect(0, 0, Ancho/4, AnchoAlbunes);
+  translate( Ancho*0.476, Alto * 0.455);
+  rect(0, 0, AnchoAlbun, AnchoAlbunes);
   fill(0);
   if (PunteroActual[1] >=IndiceAlbun[1] +10 ) {
-    IndiceAlbun[1] ++;
+    IndiceAlbun[1]++;
   } else if (PunteroActual[1] <IndiceAlbun[1] ) {
-    IndiceAlbun[1] --;
+    IndiceAlbun[1]--;
   }
   int Indice = IndiceAlbun[1];
   for (int i = 0; i< 10; i++) {
     String NombrePista = AlbunActual.get(Indice).NombrePista;
     if (Indice == PunteroActual[1]) {
       fill(226, 117, 15);
-      rect(0, i*AnchoCelda, Ancho/4, AnchoCelda);
+      rect(0, i*AnchoCelda, AnchoAlbun, AnchoCelda);
     } 
     fill(0);
-    text(NombrePista, AnchoAlbunes/20, AnchoCelda*i);
+    text((i+1)+" "+NombrePista, AnchoAlbunes/20, AnchoCelda*i);
     Indice++;
     if (Indice >= AlbunActual.CantidadPistas ) {
       popMatrix();
@@ -123,12 +126,14 @@ void DibujarVolumen() {
   text("Volumen: "+int(Volumen), Ancho- 380, 50);
 }
 
+
 void CantidadCreditos() {
   int TamanoFunte = int(Alto/15);
-  PFont Demo;
-  String Texto = "Anton.ttf";
-  Demo = createFont(Texto, TamanoFunte);
-  textFont(Demo);
+
+  // String Texto = "Anton.ttf";
+  //Demo = loadFont(Texto);
+  //Demo = createFont(Texto, TamanoFunte);
+  textFont(FuenteIndice);
   pushMatrix();
   textSize(TamanoFunte);
   textAlign(LEFT, TOP);
