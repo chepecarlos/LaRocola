@@ -5,10 +5,10 @@ void Fondo() {
   Ancho =  width;
   Alto = height;
   if (EstadoReproducion == 0 ) {
-    background(240);
-    //img = loadImage("fondo.png");
-    //img.resize(int(Ancho), int(Alto));
-    //background(img);
+    //background(240);
+    img = loadImage("FONDO-ROKOLA.png");
+    img.resize(int(Ancho), int(Alto));
+    background(img);
   } else if (   EstadoReproducion == 1) {
     //Codigo
     background(240);
@@ -19,16 +19,16 @@ void Fondo() {
 }
 
 void DibujarAlbunes() {
-  float AnchoAlbunes = Alto*0.56;
-  float AnchoCelda = AnchoAlbunes/10;
-  int TamanoFunte = int(AnchoCelda -AnchoCelda/10);
-
+  float AnchoAlbunes = Alto*0.525;
+  float AnchoCelda = AnchoAlbunes*(0.1);
+  int TamanoFunte = int(AnchoCelda - AnchoCelda/10);
+  String Texto = "Ubuntu-L.ttf";
+  PFont Demo = createFont(Texto, TamanoFunte);
+  textFont(Demo);
   pushMatrix();
   textSize(TamanoFunte);
   textAlign(LEFT, TOP);
-  fill(231);
-  translate( Ancho/4, Alto - AnchoAlbunes);
-  rect(0, 0, Ancho/4, AnchoAlbunes);
+  translate( Ancho*(0.23), Alto - AnchoAlbunes- Alto*0.03);
   fill(0);
   if (PunteroActual[0] >=IndiceAlbun[0] +10 ) {
     IndiceAlbun[0] ++;
@@ -40,12 +40,12 @@ void DibujarAlbunes() {
     String NombreAlbun = Biblioteca.get(Indice).NombreAlbun;
     if (Indice == PunteroActual[0]) {
       fill(0, 115, 216);
-      rect(0, i*AnchoCelda, Ancho/4, AnchoCelda);
+      rect(0, i*AnchoCelda, Ancho*(0.235), AnchoCelda);
       fill(255);
     } else {
-      fill(0);
+      fill(46);
     }
-    text(NombreAlbun, AnchoAlbunes/20, AnchoCelda*i);
+    text(" "+NombreAlbun, 0, AnchoCelda*i);
     Indice++;
     if (Indice >= Biblioteca.size() ) {
       popMatrix();
@@ -125,23 +125,23 @@ void DibujarVolumen() {
 
 void CantidadCreditos() {
   int TamanoFunte = int(Alto/15);
+  PFont Demo;
+  String Texto = "Anton.ttf";
+  Demo = createFont(Texto, TamanoFunte);
+  textFont(Demo);
   pushMatrix();
   textSize(TamanoFunte);
   textAlign(LEFT, TOP);
-  translate( 0, Alto- Alto/15);
+  translate( 0, Alto- Alto/15-Alto/60);
   noStroke();
-  fill(154, 216, 0);
-  rect(0, 0, Ancho/8, Alto/15);
   fill(0);
-  text("$:"+int(Saldo), 0, 0);
-  translate( Ancho/8, 0);
-  fill(216, 5, 90);
-  rect(0, 0, Ancho/8, Alto/15);
+  text(" $ "+int(Saldo), 0, 0);
   float TiempoFaltante = frameRate;
   fill(0);
-  text(TiempoFaltante, 0, 0);
+  text(TiempoFaltante, Ancho/10, 0);
   popMatrix();
 }
+
 /*
 void Nombre() {
  if (!Dormir) {

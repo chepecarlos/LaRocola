@@ -1,9 +1,3 @@
-//Libreria de Audio de processing
-import ddf.minim.*;
-import ddf.minim.effects.*;
-//Liberias de Video de processing
-import processing.video.*;
-
 //Objeto para Manejar Minin
 Minim minim; 
 
@@ -26,15 +20,15 @@ float Alto;
 float Saldo = 1;
 
 int EstadoReproducion = 0;
+PFont FuentaSimple;
 
 void setup() {
-  //size(1200, 600, P2D);
+  size(1200, 600, P2D);
   //size(600, 300, P2D);
-
-  //surface.setResizable(true);
-  fullScreen();
-  Ancho =  width;
-  Alto = height;
+  surface.setResizable(true);
+  // fullScreen();
+  // Ancho =  width;
+  // Alto = height;
   CancionesDespues = new ArrayList();
   RutaCanciones = sketchPath()+"/data";
 
