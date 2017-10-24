@@ -136,7 +136,7 @@ void ActualizarSaldo() {
 }
 
 void ReproducirPista() {
-  //Saldo = Saldo -1;
+  Saldo = Saldo -1;
   AlbunActual = Biblioteca.get(PunteroActual[0]);
   PistaActual = AlbunActual.get(PunteroActual[1]);
   ColaPista.add(PistaActual);

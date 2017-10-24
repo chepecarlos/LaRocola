@@ -5,6 +5,8 @@ Minim minim;
 
 boolean Dormir = true;
 float TiempoPasado  = 0;
+//Tiempo para que termine la pista
+int TiempoRestante = 0;
 
 //Direcion de la musica
 String RutaCanciones;
@@ -19,7 +21,7 @@ float  Volumen = 50;
 float Ancho;
 float Alto;
 //Cuanto fondos hay 
-float Saldo = 1;
+float Saldo = 0;
 
 int EstadoReproducion = 0;
 PFont FuentaSimple;
@@ -55,14 +57,15 @@ void draw() {
   // println("w:"+pixelWidth+" H:"+pixelHeight+" R:"+ R);  
   Fondo();
   //Nombre();
-  DibujarAlbunes();
-  DibujarPistas();
-  DibujarLista();
-  DibujarVercion();
-  CantidadCreditos();
-  //DibujarVolumen();
-  CambiarPista();
-  
+  if (Biblioteca.size() > 0) {
+    DibujarAlbunes();
+    DibujarPistas();
+    DibujarLista();
+    DibujarVercion();
+    CantidadCreditos();
+    //DibujarVolumen();
+    CambiarPista();
+  }
   //Sueno();
 }
 

@@ -138,10 +138,6 @@ void DibujarVolumen() {
 
 void CantidadCreditos() {
   int TamanoFunte = int(Alto/15);
-
-  // String Texto = "Anton.ttf";
-  //Demo = loadFont(Texto);
-  //Demo = createFont(Texto, TamanoFunte);
   textFont(FuenteIndice);
   pushMatrix();
   textSize(TamanoFunte);
@@ -150,9 +146,12 @@ void CantidadCreditos() {
   noStroke();
   fill(0);
   text(" $ "+int(Saldo), 0, 0);
-  float TiempoFaltante = frameRate;
+  // float TiempoFaltante = frameRate;
   fill(0);
-  text(TiempoFaltante, Ancho/10, 0);
+  int Segundo = TiempoRestante% 60;
+  int Minuto = (TiempoRestante-Segundo)/60;
+  // TiempoRestante-Minuto;
+  text(Minuto+":"+Segundo, Ancho/10, 0);
   popMatrix();
 }
 

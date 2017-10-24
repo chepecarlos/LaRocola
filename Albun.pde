@@ -62,10 +62,12 @@ class Pista {
 
   boolean Termino() {
     if (EsAudio) {
+      TiempoRestante = ( Player.length() -Player.position() )/1000;
       if ( abs(Player.position() -Player.length() ) < 100) {
         return true;
       }
     } else {
+      TiempoRestante =int( (Pelicula.duration() - Pelicula.time())/1000);
       if (abs( Pelicula.duration() - Pelicula.time()) < 100) {
         return true;
       }
