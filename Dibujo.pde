@@ -4,18 +4,18 @@ int[] IndiceAlbun = {0, 0};
 void Fondo() {
   Ancho =  width;
   Alto = height;
-  if (EstadoReproducion == 0 ) {
-    //background(240);
-    img = loadImage("FONDO-ROKOLA.png");
-    img.resize(int(Ancho), int(Alto));
-    background(img);
-  } else if (   EstadoReproducion == 1) {
-    //Codigo
-    background(240);
-  } else if (EstadoReproducion == 2) {
-    ActualizarVideo();
-    println(frameRate);
-  }
+  //if (EstadoReproducion == 0 ) {
+  //background(240);
+  img = loadImage("FONDO-ROKOLA.png");
+  img.resize(int(Ancho), int(Alto));
+  background(img);
+  //} else if (   EstadoReproducion == 1) {
+  //Codigo
+  // background(240);
+  //} else if (EstadoReproducion == 2) {
+  //  ActualizarVideo();
+  //  println(frameRate);
+  //}
 }
 
 void DibujarAlbunes() {
@@ -58,21 +58,26 @@ void DibujarAlbunes() {
 }
 
 void DibujarLista() {
-  float AnchoAlbunes = Alto*0.56;
+  float AnchoAlbunes = Alto*0.52;
   float AnchoCelda = AnchoAlbunes/10;
+  float AnchoCel = Ancho*0.275;
   int TamanoFunte = int(AnchoCelda -AnchoCelda/10);
   pushMatrix();
   textSize(TamanoFunte);
   textAlign(LEFT, TOP);
   fill(18, 10, 60);
-  translate( 3*Ancho/4, Alto - AnchoAlbunes);
-  rect(0, 0, Ancho/4, AnchoAlbunes);
-  fill(100, 100, 100);
+  translate( Ancho*0.720, Alto*0.45);
+  //rect(0, 0, AnchoCel, AnchoAlbunes);
+  fill(255);
   if (ColaPista.size()> 0) {
     for (int i = 0; i< 10; i++) {
       if (ColaPista.size() > i ) {
         Pista PistaActual = ColaPista.get(i);
-        text(PistaActual.NombrePista, 0, AnchoCelda*i);
+        String PistaNombre =  PistaActual.NombrePista.toLowerCase();
+        if (PistaNombre.length() > 20 ) {
+          PistaNombre  = PistaNombre.substring(0, 20)+"...";
+        }
+        text((i+1)+" "+PistaNombre, 0, AnchoCelda*i);
       }
     }
   }
@@ -86,7 +91,7 @@ void DibujarPistas() {
   float AnchoCelda = AnchoAlbunes*0.10;
   int TamanoFunte = int(AnchoCelda -AnchoCelda/10);
   pushMatrix();
-  textSize(TamanoFunte);
+  textSize(TamanoFunte*0.8);
   textAlign(LEFT, TOP);
   fill(231);
   translate( Ancho*0.476, Alto * 0.455);
@@ -105,6 +110,10 @@ void DibujarPistas() {
       rect(0, i*AnchoCelda, AnchoAlbun, AnchoCelda);
     } 
     fill(0);
+    NombrePista = NombrePista.toLowerCase();
+    if (NombrePista.length() > 15 ) {
+      NombrePista = NombrePista.substring(0, 20)+"...";
+    }
     text((i+1)+" "+NombrePista, AnchoAlbunes/20, AnchoCelda*i);
     Indice++;
     if (Indice >= AlbunActual.CantidadPistas ) {
