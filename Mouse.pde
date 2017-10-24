@@ -110,8 +110,9 @@ void SubirAlbun() {
   PunteroActual[0]++; 
   if (PunteroActual[0] > Biblioteca.size() - 1) {
     PunteroActual[0]--;
+  } else {
+    AlbunActual = Biblioteca.get(PunteroActual[0]);
   }
-  AlbunActual = Biblioteca.get(PunteroActual[0]);
   PunteroActual[1] = 0;
   IndiceAlbun[1] = 0;
   println("Menu Albun "+PunteroActual[0]+":"+AlbunActual.NombreAlbun);
@@ -135,27 +136,11 @@ void ActualizarSaldo() {
 }
 
 void ReproducirPista() {
+  //Saldo = Saldo -1;
+  AlbunActual = Biblioteca.get(PunteroActual[0]);
+  PistaActual = AlbunActual.get(PunteroActual[1]);
   ColaPista.add(PistaActual);
   println("Agregar la lista "+ColaPista.size()+":"+PistaActual.NombrePista);
-  /*
-  if ( ColaPista.size() > 0) {
-   Saldo = Saldo - 1;
-   Pista PistaActual = ColaPista.get(0);
-   PistaActual.Reproducir();
-   } else {
-   println("No hay Pista a repoducir");
-   }
-   
-   if (EstadoReproducion  == 0) {
-   println("Repoduciondo desde Apagado");
-   ReproducirMedia();
-   } else {
-   println("Agregando para despues:");
-   int Valor = IDCancion;
-   CancionesDespues.add(Valor);
-   printArray(CancionesDespues);
-   }
-   */
 }
 
 void ApagarPC() {

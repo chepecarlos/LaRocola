@@ -112,7 +112,7 @@ void DibujarPistas() {
     fill(0);
     NombrePista = NombrePista.toLowerCase();
     if (NombrePista.length() > 15 ) {
-      NombrePista = NombrePista.substring(0, 20)+"...";
+      NombrePista = NombrePista.substring(0, 15)+"...";
     }
     text((i+1)+" "+NombrePista, AnchoAlbunes/20, AnchoCelda*i);
     Indice++;
@@ -190,6 +190,17 @@ void ActualizarVideo() {
     image(Pelicula, 0, 0, width, height);
   }
 }
+
+void DibujarVercion() {
+  pushMatrix();
+  int TamanoFunte = int(Alto/60);
+  textSize(TamanoFunte);
+  translate( Ancho - Ancho*0.06, 0);
+  fill(100);
+  text("Vercion "+Vercion, 0, 0);
+  popMatrix();
+}
+
 
 void Sueno() {
   if (millis() - TiempoPasado > 5000) {

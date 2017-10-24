@@ -1,3 +1,5 @@
+String Vercion = "0.0.1";
+
 //Objeto para Manejar Minin
 Minim minim; 
 
@@ -56,9 +58,11 @@ void draw() {
   DibujarAlbunes();
   DibujarPistas();
   DibujarLista();
+  DibujarVercion();
   CantidadCreditos();
   //DibujarVolumen();
   CambiarPista();
+  
   //Sueno();
 }
 

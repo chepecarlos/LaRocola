@@ -5,6 +5,10 @@
 * Buscador de Albunes
 * Sistema de Actualizaciones
 
+# Errorres
+
+
+
 # Cosas a implementar
 
 * Probar Sistema de Actualizaciones
