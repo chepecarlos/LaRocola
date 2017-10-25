@@ -137,7 +137,7 @@ void DibujarVolumen() {
 
 
 void CantidadCreditos() {
-  int TamanoFunte = int(Alto/15);
+  int TamanoFunte = int(Alto/20);
   textFont(FuenteIndice);
   pushMatrix();
   textSize(TamanoFunte);
@@ -145,13 +145,16 @@ void CantidadCreditos() {
   translate( 0, Alto- Alto/15-Alto/60);
   noStroke();
   fill(0);
-  text(" $ "+Saldo, 0, 0);
-  // float TiempoFaltante = frameRate;
-  fill(0);
+  text(" $ "+Saldo, 0, TamanoFunte/3);
+  fill(255);
   int Segundo = TiempoRestante% 60;
   int Minuto = (TiempoRestante-Segundo)/60;
   // TiempoRestante-Minuto;
-  text(Minuto+":"+Segundo, Ancho/10, 0);
+  if (Segundo < 10) {
+    text(Minuto+":0"+Segundo, Ancho/8, TamanoFunte/3);
+  } else {
+    text(Minuto+":"+Segundo, Ancho/8, TamanoFunte/3);
+  }
   popMatrix();
 }
 
