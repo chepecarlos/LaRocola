@@ -1,7 +1,10 @@
 #include <Bounce.h>
-#define PinInterupcion 14 //A0
+#define PinCorra 14 //A0
+#define PinDolar 15 //A1
 
-// Q - Saldo
+
+// Q - Saldo 0.25
+// E - Saldo 1.00
 Bounce Reproducir = Bounce(0, 10);    // w - Reproducir
 Bounce SubirLista = Bounce(1, 10);    // a - Subir Lista
 Bounce BajarLista = Bounce(2, 10);    // z - Bajar Lista
@@ -20,8 +23,12 @@ void setup() {
     pinMode(i, INPUT_PULLUP);
   }
 
-  pinMode(PinInterupcion, INPUT);
-  attachInterrupt(PinInterupcion, IngresarMoneda, FALLING);
+  pinMode(PinCorra, INPUT);
+  attachInterrupt(PinCorra, IngresarCorra, FALLING);
+
+  
+  pinMode(PinDolar, INPUT);
+  attachInterrupt(PinDolar, IngresarDolar, FALLING);
 
 }
 
@@ -55,7 +62,14 @@ void PrecionarTecla(Bounce Boton, char Letra) {
   }
 }
 
-void IngresarMoneda() {
+void IngresarDolar() {
+  cli();
+  Keyboard.press('e');
+  Keyboard.release('e');
+  sei();
+}
+
+void IngresarCorra() {
   cli();
   Keyboard.press('q');
   Keyboard.release('q');
