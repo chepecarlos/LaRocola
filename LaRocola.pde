@@ -1,3 +1,7 @@
+//Variable para poner el sistema en pantalla Completa o ventana redimencionable
+boolean PantallaCompleta = true;
+
+//Vercion del sistema 
 String Vercion = "0.0.1";
 
 //Objeto para Manejar Minin
@@ -29,18 +33,16 @@ PFont FuentaSimple;
 PFont FuenteIndice;
 PFont FuenteAlbun;
 
+
 void setup() {
-  //size(1200, 600, P2D);
-  //size(600, 300, P2D);
-  //surface.setResizable(true);
+  if (!PantallaCompleta ) {
+    surface.setResizable(true);
+  }
 
   FuenteIndice =  createFont("Anton.ttf", 100);
   FuenteAlbun  = createFont("Ubuntu-L.ttf", 100);
 
-  fullScreen();
-  // Ancho =  width;
-  // Alto = height;
-  CancionesDespues = new ArrayList();
+  //  CancionesDespues = new ArrayList();
   RutaCanciones = sketchPath()+"/data";
 
   minim = new Minim(this);
@@ -53,10 +55,7 @@ void setup() {
 }
 
 void draw() {
-  // float R = float(pixelWidth)/float(pixelHeight) ;
-  // println("w:"+pixelWidth+" H:"+pixelHeight+" R:"+ R);  
   Fondo();
-  //Nombre();
   if (Biblioteca.size() > 0) {
     DibujarAlbunes();
     DibujarPistas();

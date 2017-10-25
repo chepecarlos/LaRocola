@@ -2,7 +2,8 @@ import java.io.*;
 
 /*
  * Control Teclado
- * q o Q -> Subir Saldo
+ * q o Q -> Subir saldo 0.25
+ * e o E -> Subir Saldo 1.00
  * w o W-> Reproducir Pista
  * UP o a -> Subir Lista
  * DONW o z -> Bajar Lista
@@ -18,7 +19,9 @@ void keyReleased() {
   Dormir = false;
   TiempoPasado = millis();
   if (key == 'q' || key == 'Q') {
-    ActualizarSaldo();
+    ActualizarSaldo(0.25);
+  } else if (key == 'e' || key == 'E') {
+    ActualizarSaldo(1);
   } else if (Saldo > 0) {
     if (key == CODED) {
       switch(keyCode) {
@@ -130,13 +133,13 @@ void BajarAlbun() {
   println("Menu Albun "+PunteroActual[0]+":"+AlbunActual.NombreAlbun);
 }
 
-void ActualizarSaldo() {
-  Saldo = Saldo + 1;
+void ActualizarSaldo(float C) {
+  Saldo = Saldo + C;
   println("Saldo Actual "+Saldo);
 }
 
 void ReproducirPista() {
-  Saldo = Saldo -1;
+  Saldo = Saldo -0.25;
   AlbunActual = Biblioteca.get(PunteroActual[0]);
   PistaActual = AlbunActual.get(PunteroActual[1]);
   ColaPista.add(PistaActual);

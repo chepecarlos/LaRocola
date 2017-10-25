@@ -145,7 +145,7 @@ void CantidadCreditos() {
   translate( 0, Alto- Alto/15-Alto/60);
   noStroke();
   fill(0);
-  text(" $ "+int(Saldo), 0, 0);
+  text(" $ "+Saldo, 0, 0);
   // float TiempoFaltante = frameRate;
   fill(0);
   int Segundo = TiempoRestante% 60;
