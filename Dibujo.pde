@@ -2,20 +2,13 @@ PImage img; //<>//
 int[] IndiceAlbun = {0, 0};
 
 void Fondo() {
-  Ancho =  width;
-  Alto = height;
-  //if (EstadoReproducion == 0 ) {
-  //background(240);
-  img = loadImage("FONDO-ROKOLA.png");
-  img.resize(int(Ancho), int(Alto));
-  background(img);
-  //} else if (   EstadoReproducion == 1) {
-  //Codigo
-  // background(240);
-  //} else if (EstadoReproducion == 2) {
-  //  ActualizarVideo();
-  //  println(frameRate);
-  //}
+  if (!VideoCompleto) {
+    Ancho =  width;
+    Alto = height;
+   img = loadImage("FONDO-ROKOLA.png");
+    img.resize(int(Ancho), int(Alto));
+    background(img);
+  }
 }
 
 void DibujarAlbunes() {
@@ -83,7 +76,6 @@ void DibujarLista() {
   }
   popMatrix();
 }
-
 
 void DibujarPistas() {
   float AnchoAlbunes = Alto*0.51;
@@ -186,12 +178,6 @@ void Nombre() {
  }
  }
  */
-void ActualizarVideo() {
-  if (EstadoReproducion == 2) {
-    Pelicula.read();
-    image(Pelicula, 0, 0, width, height);
-  }
-}
 
 void DibujarVercion() {
   pushMatrix();
@@ -205,7 +191,8 @@ void DibujarVercion() {
 
 
 void Sueno() {
-  if (millis() - TiempoPasado > 5000) {
-    Dormir = true;
+  if (millis() - TiempoPasado > 2000) {
+    println( "Tiempo :"+( millis() - TiempoPasado));
+    VideoCompleto = true;
   }
 }

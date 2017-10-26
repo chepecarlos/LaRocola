@@ -16,8 +16,10 @@ Movie Pelicula;
 //Objeto para repducicir 
 AudioPlayer Player;
 
+//Punto Acutal de secion del [0] Albun y [1] Pista
 int[] PunteroActual = {0, 0};
 
+//Clase de la pista que mantiene la informacion base sobre ellas y metos de repdocuion
 class Pista {
   PImage ImagenPista;
   String NombrePista;
@@ -67,8 +69,16 @@ class Pista {
         return true;
       }
     } else {
-      TiempoRestante =int( (Pelicula.duration() - Pelicula.time())/1000);
-      if (abs( Pelicula.duration() - Pelicula.time()) < 100) {
+      if (VideoCompleto) {
+        MostarVideoCompleto();
+        println(frameRate);
+      } else {
+        MostarVideoMiniatura();
+        Sueno();
+      }
+      TiempoRestante =int(Pelicula.duration() - Pelicula.time());
+      println("Tiempo Restante"+TiempoRestante);
+      if (abs( Pelicula.duration() - Pelicula.time()) < 5) {
         return true;
       }
     }
@@ -83,6 +93,7 @@ class Pista {
     }
   }
 }
+
 class Albun {
   int CantidadPistas;
   String NombreAlbun;

@@ -1,5 +1,5 @@
 //Variable para poner el sistema en pantalla Completa o ventana redimencionable
-boolean PantallaCompleta = true;
+boolean PantallaCompleta = false;
 
 //Vercion del sistema 
 String Vercion = "0.0.1";
@@ -7,7 +7,7 @@ String Vercion = "0.0.1";
 //Objeto para Manejar Minin
 Minim minim; 
 
-boolean Dormir = true;
+boolean VideoCompleto = false;
 float TiempoPasado  = 0;
 //Tiempo para que termine la pista
 int TiempoRestante = 0;
@@ -38,6 +38,7 @@ void setup() {
   if (!PantallaCompleta ) {
     surface.setResizable(true);
   }
+  //frameRate(60);
 
   FuenteIndice =  createFont("Anton.ttf", 100);
   FuenteAlbun  = createFont("Ubuntu-L.ttf", 100);
@@ -57,12 +58,13 @@ void setup() {
 void draw() {
   Fondo();
   if (Biblioteca.size() > 0) {
-    DibujarAlbunes();
-    DibujarPistas();
-    DibujarLista();
-    DibujarVercion();
-    CantidadCreditos();
-    //DibujarVolumen();
+    if (!VideoCompleto) {
+      DibujarAlbunes();
+      DibujarPistas();
+      DibujarLista();
+      DibujarVercion();
+      CantidadCreditos();
+    }
     CambiarPista();
   }
   //Sueno();

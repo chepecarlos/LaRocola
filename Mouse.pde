@@ -16,7 +16,7 @@ import java.io.*;
  */
 
 void keyReleased() {
-  Dormir = false;
+  VideoCompleto = false;
   TiempoPasado = millis();
   if (key == 'q' || key == 'Q') {
     ActualizarSaldo(0.25);
