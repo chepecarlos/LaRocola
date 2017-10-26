@@ -2,10 +2,10 @@ PImage img; //<>//
 int[] IndiceAlbun = {0, 0};
 
 void Fondo() {
+  Ancho =  width;
+  Alto = height;
   if (!VideoCompleto) {
-    Ancho =  width;
-    Alto = height;
-   img = loadImage("FONDO-ROKOLA.png");
+    img = loadImage("FONDO-ROKOLA.png");
     img.resize(int(Ancho), int(Alto));
     background(img);
   }
@@ -191,8 +191,8 @@ void DibujarVercion() {
 
 
 void Sueno() {
-  if (millis() - TiempoPasado > 2000) {
-    println( "Tiempo :"+( millis() - TiempoPasado));
+  if (millis() - TiempoPasado > 10000) {
+    //println( "Tiempo :"+( millis() - TiempoPasado));
     VideoCompleto = true;
   }
 }

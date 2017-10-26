@@ -8,11 +8,15 @@ void ReproducirVideo(String Direcion) {
 void MostarVideoMiniatura() {
   pushMatrix();
   Pelicula.read();
-  image(Pelicula, Ancho/4, Alto/4, Ancho/3, Alto/4);
+  float AnchoV = Ancho*0.28;
+  float AltoV =  (AnchoV*Pelicula.pixelHeight)/Pelicula.pixelWidth;
+  image(Pelicula, Ancho*0.72, Alto*0.15, AnchoV, AltoV);
   popMatrix();
 }
 
 void MostarVideoCompleto() {
   Pelicula.read();
-  image(Pelicula, 0, 0, width, height);
+  float AnchoV = Ancho;
+  float AltoV =  (AnchoV*Pelicula.pixelHeight)/Pelicula.pixelWidth;
+  image(Pelicula, 0, 0,AnchoV, AltoV);
 }

@@ -15,7 +15,6 @@ Movie Pelicula;
 
 //Objeto para repducicir 
 AudioPlayer Player;
-
 //Punto Acutal de secion del [0] Albun y [1] Pista
 int[] PunteroActual = {0, 0};
 
@@ -77,8 +76,7 @@ class Pista {
         Sueno();
       }
       TiempoRestante =int(Pelicula.duration() - Pelicula.time());
-      println("Tiempo Restante"+TiempoRestante);
-      if (abs( Pelicula.duration() - Pelicula.time()) < 5) {
+       if (abs( Pelicula.duration() - Pelicula.time()) < 5) {
         return true;
       }
     }
@@ -129,6 +127,8 @@ class Albun {
         case "WAV":
         case "au":
         case "AU":
+        case "mkv":
+        case "MKV":
           EsPista = true;
           break;
         default:
