@@ -1,5 +1,5 @@
 //Variable para poner el sistema en pantalla Completa o ventana redimencionable
-boolean PantallaCompleta = false;
+boolean PantallaCompleta = true;
 
 //Vercion del sistema 
 String Vercion = "0.0.1";
