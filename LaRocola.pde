@@ -1,5 +1,5 @@
 //Variable para poner el sistema en pantalla Completa o ventana redimencionable
-boolean PantallaCompleta = true;
+boolean PantallaCompleta = false;
 
 //Vercion del sistema 
 String Vercion = "0.0.1";
@@ -38,6 +38,7 @@ void setup() {
   if (!PantallaCompleta ) {
     surface.setResizable(true);
   }
+  noCursor();
   //frameRate(60);
 
   FuenteIndice =  createFont("Anton.ttf", 100);
