@@ -1,5 +1,5 @@
-PImage img; //<>//
-int[] IndiceAlbun = {0, 0};
+PImage img; //<>// //<>//
+
 
 void Fondo() {
   Ancho =  width;
@@ -21,15 +21,15 @@ void DibujarAlbunes() {
   textAlign(LEFT, TOP);
   translate( Ancho*(0.23), Alto - AnchoAlbunes- Alto*0.03);
   fill(0);
-  if (PunteroActual[0] >=IndiceAlbun[0] +10 ) {
-    IndiceAlbun[0] ++;
-  } else if (PunteroActual[0] <IndiceAlbun[0] ) {
-    IndiceAlbun[0] --;
+  if (PunteroActual.Albun >= PunteroMenu.Albun +10 ) {
+    PunteroMenu.Albun++;
+  } else if (PunteroActual.Albun < PunteroMenu.Albun ) {
+    PunteroMenu.Albun --;
   }
-  int Indice = IndiceAlbun[0];
+  int Indice = PunteroMenu.Albun;
   for (int i =0; i< 10; i++) {
-    String NombreAlbun = Biblioteca.get(Indice).NombreAlbun;
-    if (Indice == PunteroActual[0]) {
+    String NombreAlbun = GeneroActual.get(Indice).NombreAlbun;
+    if (Indice == PunteroActual.Albun) {
       fill(0, 115, 216);
       rect(0, i*AnchoCelda, Ancho*(0.235), AnchoCelda);
       fill(255);
@@ -42,7 +42,7 @@ void DibujarAlbunes() {
     }
     text(" "+NombreAlbun, 0, AnchoCelda*i);
     Indice++;
-    if (Indice >= Biblioteca.size() ) {
+    if (Indice >= GeneroActual.CantidadAlbunes ) {
       popMatrix();
       return;
     }
@@ -89,15 +89,15 @@ void DibujarPistas() {
   translate( Ancho*0.476, Alto * 0.455);
   rect(0, 0, AnchoAlbun, AnchoAlbunes);
   fill(0);
-  if (PunteroActual[1] >=IndiceAlbun[1] +10 ) {
-    IndiceAlbun[1]++;
-  } else if (PunteroActual[1] <IndiceAlbun[1] ) {
-    IndiceAlbun[1]--;
+  if (PunteroActual.Pista >= PunteroMenu.Pista +10 ) {
+    PunteroMenu.Pista++;
+  } else if (PunteroActual.Pista < PunteroMenu.Pista ) {
+    PunteroMenu.Pista--;
   }
-  int Indice = IndiceAlbun[1];
+  int Indice = PunteroMenu.Pista;
   for (int i = 0; i< 10; i++) {
     String NombrePista = AlbunActual.get(Indice).NombrePista;
-    if (Indice == PunteroActual[1]) {
+    if (Indice == PunteroActual.Pista) {
       fill(226, 117, 15);
       rect(0, i*AnchoCelda, AnchoAlbun, AnchoCelda);
     } 

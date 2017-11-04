@@ -9,39 +9,47 @@ import java.io.*;
  * DONW o z -> Bajar Lista
  * RIGHT o s -> Subir Albun
  * LEFT o X -> Bajar Albun
+ * PgUp o f -> Subir Genero
+ * PGDn o V -> Bajar Genero 
  * o -> Actualizar Git
  * p -> Apagar PC
- * f -> Subir Volumen
- * v -> Bajar Volumen 
  */
 
 void keyReleased() {
   VideoCompleto = false;
   TiempoPasado = millis();
+  //println("key: "+key);
+  //println("keyCode: "+keyCode); 
   if (key == 'q' || key == 'Q') {
     ActualizarSaldo(0.25);
   } else if (key == 'e' || key == 'E') {
     ActualizarSaldo(1);
   } else if (Saldo > 0) {
-    if (key == CODED) {
-      switch(keyCode) {
-      case UP:
-        println("Subir Pista");
-        SubirPista();
-        break;
-      case DOWN:
-        println("Bajar Pista");
-        BajarPista();
-        break;
-      case RIGHT:
-        println("Subir Albun");
-        SubirAlbun();
-        break;
-      case LEFT:
-        println("Bajar Albun");
-        BajarAlbun();
-        break;
-      }
+    switch(keyCode) {
+    case UP:
+      println("Subir Pista");
+      SubirPista();
+      break;
+    case DOWN:
+      println("Bajar Pista");
+      BajarPista();
+      break;
+    case RIGHT:
+      println("Subir Albun");
+      SubirAlbun();
+      break;
+    case LEFT:
+      println("Bajar Albun");
+      BajarAlbun();
+      break;
+    case 11://Page Up
+      println("Bajar Genero");
+      BajarGenero();
+      break;
+    case 16://Page Donw
+      println( "Subir Genero");
+      SubirGenero();
+      break;
     }
     switch(key) {
     case 'a':
@@ -77,14 +85,17 @@ void keyReleased() {
       break;
     case 'f':
     case 'F':
-      SubirVolumen(5);
+      println("Subir Genero");
+      SubirGenero();
       break;
     case 'v':
     case 'V':
-      SubirVolumen(-5);
+      println("Bajar Genero");
+      BajarGenero();
       break;
     case 'w'://Reproducir Pista
     case 'W':
+      println("Iniciar Reproducion");
       ReproducirPista();
       break;
     }
@@ -92,45 +103,45 @@ void keyReleased() {
 }
 
 void SubirPista() {
-  PunteroActual[1]++;
-  if (PunteroActual[1]> AlbunActual.CantidadPistas -1) {
-    PunteroActual[1]--;
+  PunteroActual.Pista++;
+  if (PunteroActual.Pista> AlbunActual.CantidadPistas -1) {
+    PunteroActual.Pista--;
   }
-  PistaActual = AlbunActual.get( PunteroActual[1]);
-  println("Pista Actual "+PunteroActual[1]+":"+PistaActual.NombrePista);
+  PistaActual = AlbunActual.get( PunteroActual.Pista);
+  println("Pista Actual "+PunteroActual.Pista+":"+PistaActual.NombrePista);
 }
 
 void BajarPista() {
-  PunteroActual[1]--;
-  if (PunteroActual[1] < 0) {
-    PunteroActual[1] ++;
+  PunteroActual.Pista--;
+  if (PunteroActual.Pista < 0) {
+    PunteroActual.Pista ++;
   }
-  PistaActual = AlbunActual.get( PunteroActual[1]);
-  println("Pista Actual "+PunteroActual[1]+":"+PistaActual.NombrePista);
+  PistaActual = AlbunActual.get( PunteroActual.Pista);
+  println("Pista Actual "+PunteroActual.Pista+":"+PistaActual.NombrePista);
 }
 
 void SubirAlbun() {
-  PunteroActual[0]++; 
-  if (PunteroActual[0] > Biblioteca.size() - 1) {
-    PunteroActual[0]--;
+  PunteroActual.Albun++; 
+  if (PunteroActual.Albun > GeneroActual.CantidadAlbunes - 1) {
+    PunteroActual.Albun--;
   } else {
-    AlbunActual = Biblioteca.get(PunteroActual[0]);
+    AlbunActual = GeneroActual.get(PunteroActual.Albun);
   }
-  PunteroActual[1] = 0;
-  IndiceAlbun[1] = 0;
-  println("Menu Albun "+PunteroActual[0]+":"+AlbunActual.NombreAlbun);
+  PunteroActual.Pista = 0;
+  PunteroMenu.Pista = 0;
+  println("Menu Albun "+PunteroActual.Albun+":"+AlbunActual.NombreAlbun);
 }
 
 void BajarAlbun() {
-  PunteroActual[0]--; 
-  if (PunteroActual[0] < 0) {
-    PunteroActual[0]++;
+  PunteroActual.Albun--; 
+  if (PunteroActual.Albun < 0) {
+    PunteroActual.Albun++;
   } else {
-    AlbunActual = Biblioteca.get(PunteroActual[0]);
+    AlbunActual = GeneroActual.get(PunteroActual.Albun);
   }
-  PunteroActual[1] = 0;
-  IndiceAlbun[1] = 0;
-  println("Menu Albun "+PunteroActual[0]+":"+AlbunActual.NombreAlbun);
+  PunteroActual.Pista = 0;
+  PunteroMenu.Pista = 0;
+  println("Menu Albun "+PunteroActual.Albun+":"+AlbunActual.NombreAlbun);
 }
 
 void ActualizarSaldo(float C) {
@@ -139,9 +150,10 @@ void ActualizarSaldo(float C) {
 }
 
 void ReproducirPista() {
-  Saldo = Saldo -0.25;
-  AlbunActual = Biblioteca.get(PunteroActual[0]);
-  PistaActual = AlbunActual.get(PunteroActual[1]);
+  Saldo = Saldo - 0.25;
+  GeneroActual = BibliotecaPista.get(PunteroActual.Genero);
+  AlbunActual = GeneroActual.get(PunteroActual.Albun);
+  PistaActual = AlbunActual.get(PunteroActual.Pista);
   ColaPista.add(PistaActual);
   println("Agregar la lista "+ColaPista.size()+":"+PistaActual.NombrePista);
 }
@@ -171,4 +183,13 @@ void EjecutarActualizacion() {
   catch (Exception err) {
     println("error comando");
   }
+}
+
+void BajarGenero() {
+  println("Bajando Genero");
+  
+}
+
+void SubirGenero() {
+  println("Alto Genero");
 }

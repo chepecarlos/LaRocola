@@ -1,3 +1,10 @@
+//Libreria de Audio de processing
+import ddf.minim.*;
+import ddf.minim.effects.*;
+
+//Objeto para Manejar Minin
+Minim minim; 
+
 void ReproducirAudio(String Direcion) {
   EstadoReproducion = 1;
   Player = minim.loadFile(Direcion);

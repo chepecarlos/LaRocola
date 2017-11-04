@@ -1,12 +1,10 @@
-//Libreria de Audio de processing //<>// //<>//
-import ddf.minim.*;
-import ddf.minim.effects.*;
-//Liberias de Video de processing
-import processing.video.*;
-
-ArrayList<Albun> Biblioteca = new ArrayList<Albun>();
+ //<>//
+ArrayList<Genero> BibliotecaPista = new ArrayList<Genero>();
+//ArrayList<Albun> Biblioteca = new ArrayList<Albun>();
 ArrayList<Pista> ColaPista = new ArrayList<Pista>();
 
+//GeneroActual>>AlbunActual>>PistaActual
+Genero GeneroActual;
 Albun AlbunActual;
 Pista PistaActual;
 
@@ -15,83 +13,9 @@ Movie Pelicula;
 
 //Objeto para repducicir 
 AudioPlayer Player;
-//Punto Acutal de secion del [0] Albun y [1] Pista
-int[] PunteroActual = {0, 0};
 
-//Clase de la pista que mantiene la informacion base sobre ellas y metos de repdocuion
-class Pista {
-  PImage ImagenPista;
-  String NombrePista;
-  String DirecionPista;
-  boolean EsAudio;
-  boolean Reproduciendo;
-
-  Pista(String Nombre, String Direcion) {
-    DirecionPista = Direcion;
-    NombrePista = Nombre;
-    Reproduciendo = false;
-    TipoPista();
-    CargarImagen();
-  }
-
-  void CargarImagen() {
-    //ImagenPista = loadImage("Albun.jpg");
-  }
-
-  void TipoPista() {
-    String[] Tipo = split(NombrePista, ".");
-    switch(Tipo[Tipo.length-1]) {
-    case "mp4":
-      EsAudio = false;
-      break;
-    default:
-      EsAudio = true;
-      break;
-    }
-  }
-
-  void Reproducir() {
-    if (EsAudio) {
-      println("Reproducir Audio");
-      ReproducirAudio(DirecionPista);
-    } else {
-      println("Reproducir Video");
-      ReproducirVideo(DirecionPista);
-    }
-    Reproduciendo = true;
-  }
-
-  boolean Termino() {
-    if (EsAudio) {
-      TiempoRestante = ( Player.length() -Player.position() )/1000;
-      if ( abs(Player.position() -Player.length() ) < 100) {
-        return true;
-      }
-    } else {
-      if (VideoCompleto) {
-        MostarVideoCompleto();
-        println(frameRate);
-      } else {
-        MostarVideoMiniatura();
-        Sueno();
-      }
-      TiempoRestante =int(Pelicula.duration() - Pelicula.time());
-      if (abs( Pelicula.duration() - Pelicula.time()) < 5) {
-        VideoCompleto = false;
-        return true;
-      }
-    }
-    return false;
-  }
-
-  float TiempoFalta() {
-    if (EsAudio) {
-      return Player.length()-Player.position();
-    } else {
-      return Pelicula.time()-Pelicula.duration();
-    }
-  }
-}
+Puntero PunteroActual = new Puntero();
+Puntero PunteroMenu = new Puntero();
 
 class Albun {
   int CantidadPistas;
@@ -110,6 +34,11 @@ class Albun {
 
   Pista get(int i) {
     return ListaPista.get(i);
+  }
+
+  void add(Pista PistaActual) {
+    CantidadPistas++;
+    ListaPista.add(PistaActual);
   }
 
   void BuscarPista() {
@@ -137,9 +66,8 @@ class Albun {
           break;
         }
         if (EsPista) {
-          print(">>");
-          print("Cancion: " + Pista.getName());
-          println(" | " + Pista.getAbsolutePath());
+          print("--");
+          println("Pista-" + Pista.getName());
           ListaPista.add(new Pista(Pista.getName(), Pista.getAbsolutePath()));
           CantidadPistas++;
         }
@@ -148,32 +76,30 @@ class Albun {
   }
 }
 
-
-void CargarAlbun(String Directorio) {
-  File Archivos = new File(Directorio);
-  if (Archivos.isDirectory()) {
-    println("\nEmpezando a buscar Pistas dentro de Albunes");
-    ArrayList<File> ListaDirectorios = listFilesRecursive(Directorio);
-    for (File D : ListaDirectorios) {
-      if (D.isDirectory()) {
-        Biblioteca.add(new Albun(D.getName(), D.getAbsolutePath()));
-        print("Folder: " + D.getName());
-        println(" | " + D.getAbsolutePath());
+void CargarBiblioteca(String Direcion) {
+  File Folder = new File(Direcion);
+  if (Folder.isDirectory()) {
+    println("Empezando a Cargar Biblioteca");
+    File[] FolderGenero  = Folder.listFiles();
+    for (int i = 0; i < FolderGenero.length; i++) {
+      if (FolderGenero[i].isDirectory()) {
+        println("Genero-"+i+" "+FolderGenero[i].getName());
+        Genero GeneroTMP = new Genero(FolderGenero[i].getName(), Direcion+"/"+FolderGenero[i].getName());
+        File[] FolderArtista = FolderGenero[i].listFiles();
+        for (int j = 0; j< FolderArtista.length; j++) {
+          if (FolderArtista[j].isDirectory()) {
+            println("-Artista="+j+" "+FolderArtista[j].getName());
+            Albun ArtistaTMP = new Albun(FolderArtista[j].getName(), Direcion+"/"+FolderGenero[i].getName()+"/"+FolderArtista[j].getName());
+            GeneroTMP.add(ArtistaTMP);
+          }
+        }
+        BibliotecaPista.add(GeneroTMP);
       }
     }
-    //Eliminando todo Albun sin canciones
-    for (int i = Biblioteca.size() -1; i > -1; i--) {
-      Albun  AlbunPrueva  = Biblioteca.get(i);
-      if (AlbunPrueva.CantidadPistas == 0) {
-        Biblioteca.remove(i);
-      }
-    }
-    AlbunActual = Biblioteca.get(0);
+    GeneroActual = BibliotecaPista.get(0);
+    AlbunActual = GeneroActual.get(0);
     PistaActual = AlbunActual.get(0);
-    println("Dencidad Actual "+displayDensity());
-    println("Cantidad de Albunes "+ Biblioteca.size());
-    println("Cantidad de Pistas "+ AlbunActual.CantidadPistas);
   } else {
-    println("No existe directorio/Intenta de nuevo");
+    println("Error encontrando Biblioteca");
   }
 }

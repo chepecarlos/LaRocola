@@ -1,3 +1,6 @@
+//Liberias de Video de processing
+import processing.video.*;
+
 void ReproducirVideo(String Direcion) {
   EstadoReproducion = 2;
   Pelicula = new Movie(this, Direcion);
