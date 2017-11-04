@@ -21,7 +21,6 @@ float Saldo = 0;
 
 int EstadoReproducion = 0;
 
-PFont FuentaSimple;
 PFont FuenteIndice;
 PFont FuenteAlbun;
 

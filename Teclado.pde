@@ -102,42 +102,6 @@ void keyReleased() {
   }
 }
 
-void SubirPista() {
-  if (PunteroActual.Pista + 1 < AlbunActual.CantidadPistas) {
-    PunteroActual.Pista++;
-    PistaActual = AlbunActual.get( PunteroActual.Pista);
-    println("Pista Actual "+PunteroActual.Pista+":"+PistaActual.NombrePista);
-  }
-}
-
-void BajarPista() {
-  if (PunteroActual.Pista > 0) {
-    PunteroActual.Pista--;
-    PistaActual = AlbunActual.get( PunteroActual.Pista);
-    println("Pista Actual "+PunteroActual.Pista+":"+PistaActual.NombrePista);
-  }
-}
-
-void SubirAlbun() {
-  if (PunteroActual.Albun + 1 < GeneroActual.CantidadAlbunes ) {
-    PunteroActual.Albun++;
-    AlbunActual = GeneroActual.get(PunteroActual.Albun);
-    PunteroActual.Pista = 0;
-    PunteroMenu.Pista = 0;
-    println("Menu Albun "+PunteroActual.Albun+":"+AlbunActual.NombreAlbun);
-  }
-}
-
-void BajarAlbun() {
-  if (PunteroActual.Albun >= 0) {
-    PunteroActual.Albun--;
-    AlbunActual = GeneroActual.get(PunteroActual.Albun);
-    PunteroActual.Pista = 0;
-    PunteroMenu.Pista = 0;
-    println("Menu Albun "+PunteroActual.Albun+":"+AlbunActual.NombreAlbun);
-  }
-}
-
 void ActualizarSaldo(float C) {
   Saldo = Saldo + C;
   println("Saldo Actual "+Saldo);
@@ -179,10 +143,66 @@ void EjecutarActualizacion() {
   }
 }
 
+void SubirPista() {
+  if (PunteroActual.Pista + 1 < AlbunActual.CantidadPistas) {
+    PunteroActual.Pista++;
+    PistaActual = AlbunActual.get( PunteroActual.Pista);
+    println("Pista Actual "+PunteroActual.Pista+":"+PistaActual.NombrePista);
+  }
+}
+
+void BajarPista() {
+  if (PunteroActual.Pista > 0) {
+    PunteroActual.Pista--;
+    PistaActual = AlbunActual.get( PunteroActual.Pista);
+    println("Pista Actual "+PunteroActual.Pista+":"+PistaActual.NombrePista);
+  }
+}
+
+void SubirAlbun() {
+  if (PunteroActual.Albun + 1 < GeneroActual.CantidadAlbunes ) {
+    PunteroActual.Albun++;
+    AlbunActual = GeneroActual.get(PunteroActual.Albun);
+    PunteroActual.Pista = 0;
+    PunteroMenu.Pista = 0;
+    println("Albun Actual "+PunteroActual.Albun+":"+AlbunActual.NombreAlbun);
+  }
+}
+
+void BajarAlbun() {
+  if (PunteroActual.Albun > 0) {
+    PunteroActual.Albun--;
+    AlbunActual = GeneroActual.get(PunteroActual.Albun);
+    PunteroActual.Pista = 0;
+    PunteroMenu.Pista = 0;
+    println("Albun Actual "+PunteroActual.Albun+":"+AlbunActual.NombreAlbun);
+  }
+}
+
 void BajarGenero() {
   println("Bajando Genero");
+  if (PunteroActual.Genero > 0) {
+    PunteroActual.Genero--; 
+    GeneroActual = BibliotecaPista.get(PunteroActual.Genero);
+    PunteroActual.Albun = 0;
+    AlbunActual = GeneroActual.get(PunteroActual.Albun);
+    PunteroActual.Pista = 0;
+    PunteroMenu.Albun = 0;
+    PunteroMenu.Pista = 0;
+    println("Genero Actual "+PunteroActual.Genero+":"+GeneroActual.NombreGenero);
+  }
 }
 
 void SubirGenero() {
   println("Alto Genero");
+  if (PunteroActual.Genero  + 1 < GeneroActual.CantidadAlbunes) {
+    PunteroActual.Genero++; 
+    GeneroActual = BibliotecaPista.get(PunteroActual.Genero);
+    PunteroActual.Albun = 0;
+    AlbunActual = GeneroActual.get(PunteroActual.Albun);
+    PunteroActual.Pista = 0;
+    PunteroMenu.Albun = 0;
+    PunteroMenu.Pista = 0;
+    println("Genero Actual "+PunteroActual.Genero+":"+GeneroActual.NombreGenero);
+  }
 }
