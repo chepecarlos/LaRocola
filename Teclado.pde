@@ -103,45 +103,39 @@ void keyReleased() {
 }
 
 void SubirPista() {
-  PunteroActual.Pista++;
-  if (PunteroActual.Pista> AlbunActual.CantidadPistas -1) {
-    PunteroActual.Pista--;
+  if (PunteroActual.Pista + 1 < AlbunActual.CantidadPistas) {
+    PunteroActual.Pista++;
+    PistaActual = AlbunActual.get( PunteroActual.Pista);
+    println("Pista Actual "+PunteroActual.Pista+":"+PistaActual.NombrePista);
   }
-  PistaActual = AlbunActual.get( PunteroActual.Pista);
-  println("Pista Actual "+PunteroActual.Pista+":"+PistaActual.NombrePista);
 }
 
 void BajarPista() {
-  PunteroActual.Pista--;
-  if (PunteroActual.Pista < 0) {
-    PunteroActual.Pista ++;
+  if (PunteroActual.Pista > 0) {
+    PunteroActual.Pista--;
+    PistaActual = AlbunActual.get( PunteroActual.Pista);
+    println("Pista Actual "+PunteroActual.Pista+":"+PistaActual.NombrePista);
   }
-  PistaActual = AlbunActual.get( PunteroActual.Pista);
-  println("Pista Actual "+PunteroActual.Pista+":"+PistaActual.NombrePista);
 }
 
 void SubirAlbun() {
-  PunteroActual.Albun++; 
-  if (PunteroActual.Albun > GeneroActual.CantidadAlbunes - 1) {
-    PunteroActual.Albun--;
-  } else {
+  if (PunteroActual.Albun + 1 < GeneroActual.CantidadAlbunes ) {
+    PunteroActual.Albun++;
     AlbunActual = GeneroActual.get(PunteroActual.Albun);
+    PunteroActual.Pista = 0;
+    PunteroMenu.Pista = 0;
+    println("Menu Albun "+PunteroActual.Albun+":"+AlbunActual.NombreAlbun);
   }
-  PunteroActual.Pista = 0;
-  PunteroMenu.Pista = 0;
-  println("Menu Albun "+PunteroActual.Albun+":"+AlbunActual.NombreAlbun);
 }
 
 void BajarAlbun() {
-  PunteroActual.Albun--; 
-  if (PunteroActual.Albun < 0) {
-    PunteroActual.Albun++;
-  } else {
+  if (PunteroActual.Albun >= 0) {
+    PunteroActual.Albun--;
     AlbunActual = GeneroActual.get(PunteroActual.Albun);
+    PunteroActual.Pista = 0;
+    PunteroMenu.Pista = 0;
+    println("Menu Albun "+PunteroActual.Albun+":"+AlbunActual.NombreAlbun);
   }
-  PunteroActual.Pista = 0;
-  PunteroMenu.Pista = 0;
-  println("Menu Albun "+PunteroActual.Albun+":"+AlbunActual.NombreAlbun);
 }
 
 void ActualizarSaldo(float C) {
@@ -187,7 +181,6 @@ void EjecutarActualizacion() {
 
 void BajarGenero() {
   println("Bajando Genero");
-  
 }
 
 void SubirGenero() {

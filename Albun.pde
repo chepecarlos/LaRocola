@@ -8,9 +8,6 @@ Genero GeneroActual;
 Albun AlbunActual;
 Pista PistaActual;
 
-//Objeto para manejar video
-Movie Pelicula;
-
 //Objeto para repducicir 
 AudioPlayer Player;
 

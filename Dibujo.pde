@@ -150,35 +150,6 @@ void CantidadCreditos() {
   popMatrix();
 }
 
-/*
-void Nombre() {
- if (!Dormir) {
- int CantidadLista = 9;
- ArrayList ListaMedia = new ArrayList();
- for (int i = 0; i< CantidadLista; i++) {
- int n = i + IDCancion - CantidadLista/2;
- if ( n > NombreCanciones.length -1 ) {
- n = n - NombreCanciones.length  ;
- } else if ( n < 0) {
- n = NombreCanciones.length + n;
- }
- ListaMedia.add(n);
- }
- //println(ListaMedia);
- float Inicio = Alto/8;
- float Final = Alto - Inicio;
- for (int i =0; i<10; i++) {
- float PosicionY = map(i, 0, CantidadLista, Inicio, Final);
- fill(0);
- textAlign(LEFT, CENTER);
- textSize(50);
- //text("#"+ListaMedia.get(i), 20, PosicionY);
- textSize(20);
- }
- }
- }
- */
-
 void DibujarVercion() {
   pushMatrix();
   int TamanoFunte = int(Alto/60);
