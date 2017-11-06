@@ -5,21 +5,21 @@ void Fondo() {
   Ancho =  width;
   Alto = height;
   if (!VideoCompleto) {
-    //img = loadImage("FONDO-ROKOLA.png");
-    img = loadImage("fondo.png");
+    img = loadImage("FONDO-ROKOLA.png");
+    //img = loadImage("fondo.png");
     img.resize(int(Ancho), int(Alto));
     background(img);
   }
 }
 
 void DibujarGenero() {
-  //  float Posixion;
-  //Posixion = mouseY/Alto;
-  //if (Posixion< 0.001) {
-  //   Posixion = 1;
-  // }
-
-  //println("I:"+PunteroActual.Genero+" P:"+Posixion);
+  float Posixion;
+  Posixion = mouseX/Ancho;
+  if (Posixion< 0.001) {
+    Posixion = 1;
+  }
+  println("I:"+PunteroActual.Genero+" P:"+Posixion);
+  
   if (PunteroActual.Genero - 2 >= 0) {
     DibujarPortada(0.213, 0.043, 0.173, BibliotecaPista.get(PunteroActual.Genero-2).DirecionImagen);
   }
@@ -33,6 +33,8 @@ void DibujarGenero() {
     DibujarPortada(0.288, 0.425, 0.13, BibliotecaPista.get(PunteroActual.Genero+1).DirecionImagen);
   }
   DibujarPortada(0.34, 0.2675, 0.088, BibliotecaPista.get(PunteroActual.Genero).DirecionImagen);
+  textAlign(CENTER);
+  text(BibliotecaPista.get(PunteroActual.Genero).NombreGenero, 0.356*Ancho, 0.07*Alto);
 }
 
 void DibujarPortada(float Tamano, float X, float Y, String Direcion) {

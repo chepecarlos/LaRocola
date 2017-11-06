@@ -195,7 +195,7 @@ void BajarGenero() {
 
 void SubirGenero() {
   println("Alto Genero");
-  if (PunteroActual.Genero  + 1 < GeneroActual.CantidadAlbunes) {
+  if (PunteroActual.Genero  + 1 < BibliotecaPista.size()) {
     PunteroActual.Genero++; 
     GeneroActual = BibliotecaPista.get(PunteroActual.Genero);
     PunteroActual.Albun = 0;
