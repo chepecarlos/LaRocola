@@ -1,15 +1,10 @@
- //<>//
-ArrayList<Genero> BibliotecaPista = new ArrayList<Genero>();
-//ArrayList<Albun> Biblioteca = new ArrayList<Albun>();
+ArrayList<Genero> BibliotecaPista = new ArrayList<Genero>(); //<>//
+
 ArrayList<Pista> ColaPista = new ArrayList<Pista>();
 
-//GeneroActual>>AlbunActual>>PistaActual
 Genero GeneroActual;
 Albun AlbunActual;
 Pista PistaActual;
-
-//Objeto para repducicir 
-AudioPlayer Player;
 
 Puntero PunteroActual = new Puntero();
 Puntero PunteroMenu = new Puntero();
@@ -88,7 +83,15 @@ void CargarBiblioteca(String Direcion) {
             println("-Artista="+j+" "+FolderArtista[j].getName());
             Albun ArtistaTMP = new Albun(FolderArtista[j].getName(), Direcion+"/"+FolderGenero[i].getName()+"/"+FolderArtista[j].getName());
             GeneroTMP.add(ArtistaTMP);
+          } else if (FolderArtista[j].getName().equals("caratula.jpg")) {
+            println("--Caratula-"+FolderArtista[j].getAbsolutePath());      
+            GeneroTMP.DirecionImagen = FolderArtista[j].getAbsolutePath();
+          } else {
+            println("Algo mas "+FolderArtista[j].getName());
           }
+        }
+        if (GeneroTMP.DirecionImagen == null) {
+          GeneroTMP.DirecionImagen = "Caratula.jpg";
         }
         BibliotecaPista.add(GeneroTMP);
       }

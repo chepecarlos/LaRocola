@@ -53,6 +53,7 @@ void draw() {
       DibujarLista();
       DibujarVercion();
       CantidadCreditos();
+      DibujarGenero();
     }
     CambiarPista();
   }

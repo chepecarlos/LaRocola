@@ -2,6 +2,9 @@
 import ddf.minim.*;
 import ddf.minim.effects.*;
 
+//Objeto para repducicir 
+AudioPlayer Player;
+
 //Objeto para Manejar Minin
 Minim minim; 
 

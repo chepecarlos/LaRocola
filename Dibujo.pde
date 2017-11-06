@@ -1,15 +1,48 @@
 PImage img; //<>// //<>//
-
+PImage ImgGenero;
 
 void Fondo() {
   Ancho =  width;
   Alto = height;
   if (!VideoCompleto) {
-    img = loadImage("FONDO-ROKOLA.png");
+    //img = loadImage("FONDO-ROKOLA.png");
+    img = loadImage("fondo.png");
     img.resize(int(Ancho), int(Alto));
     background(img);
   }
 }
+
+void DibujarGenero() {
+  //  float Posixion;
+  //Posixion = mouseY/Alto;
+  //if (Posixion< 0.001) {
+  //   Posixion = 1;
+  // }
+
+  //println("I:"+PunteroActual.Genero+" P:"+Posixion);
+  if (PunteroActual.Genero - 2 >= 0) {
+    DibujarPortada(0.213, 0.043, 0.173, BibliotecaPista.get(PunteroActual.Genero-2).DirecionImagen);
+  }
+  if (PunteroActual.Genero + 2 < BibliotecaPista.size()) {
+    DibujarPortada(0.213, 0.56, 0.173, BibliotecaPista.get(PunteroActual.Genero+2).DirecionImagen);
+  }
+  if (PunteroActual.Genero - 1 >= 0) {
+    DibujarPortada(0.288, 0.14, 0.13, BibliotecaPista.get(PunteroActual.Genero-1).DirecionImagen);
+  }
+  if (PunteroActual.Genero + 1 < BibliotecaPista.size()) {
+    DibujarPortada(0.288, 0.425, 0.13, BibliotecaPista.get(PunteroActual.Genero+1).DirecionImagen);
+  }
+  DibujarPortada(0.34, 0.2675, 0.088, BibliotecaPista.get(PunteroActual.Genero).DirecionImagen);
+}
+
+void DibujarPortada(float Tamano, float X, float Y, String Direcion) {
+
+  PImage ImgPortada;
+  ImgPortada = loadImage(Direcion);
+  ImgPortada.resize(int(Tamano*Alto), int(Tamano*0.88*Alto));
+  image(ImgPortada, X*Ancho, Y*Alto);
+}
+
 
 void DibujarAlbunes() {
   float AnchoAlbunes = Alto*0.525;

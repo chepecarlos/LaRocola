@@ -1,6 +1,6 @@
 class Genero {
   int CantidadAlbunes;
-  String NombreGenero;
+  String NombreGenero = null;
   String DirecionGenero;
   String DirecionImagen;
   ArrayList<Albun> ListaAlbunes = new ArrayList<Albun>();
