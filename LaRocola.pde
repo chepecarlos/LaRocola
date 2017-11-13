@@ -1,13 +1,15 @@
 //Variable para poner el sistema en pantalla Completa o ventana redimencionable
-boolean PantallaCompleta = false;
+boolean PantallaCompleta = true;
 
 //Vercion del sistema 
-String Vercion = "0.0.2";
+String Vercion = "0.0.3";
 
 boolean VideoCompleto = false;
 float TiempoPasado  = 0;
 //Tiempo para que termine la pista
 int TiempoRestante = 0;
+int TiempoPista = 0;
+int ColaAnterior = 0;
 
 //Direcion de la musica
 String RutaCanciones;
@@ -43,15 +45,22 @@ void setup() {
   //CargarAlbun("/home/chepecarlos/Musica");
 
   CargarBiblioteca("/home/chepecarlos/Musica");
+
+  Ancho =  width;
+  Alto = height;
 }
 
 void draw() {
-
-  if (PunteroActual.Diferente(PunteroAnterior) || Saldo != SaldoAnterior || CambiarPista() ) {
+  if (PunteroActual.Diferente(PunteroAnterior) || 
+    Saldo != SaldoAnterior ||
+    CambiarPista() ||
+    ColaAnterior != ColaPista.size() ) {
     SaldoAnterior = Saldo;
     PunteroAnterior.Asignar(PunteroActual);
+    ColaAnterior = ColaPista.size();
     Fondo();
     if (BibliotecaPista.size() > 0) {
+      println("Dibujar GUI");
       if (!VideoCompleto) {
         DibujarAlbunes();
         DibujarPistas();
@@ -62,6 +71,8 @@ void draw() {
       }
     }
   }
+  DibujarBarraReproducion();
+
   CambiarPista();
   //println(frameRate);
 }

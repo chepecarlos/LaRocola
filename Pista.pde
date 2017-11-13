@@ -44,6 +44,7 @@ class Pista {
   boolean Termino() {
     if (EsAudio) {
       TiempoRestante = ( Player.length() -Player.position() )/1000;
+      TiempoPista = Player.length();
       if ( abs(Player.position() -Player.length() ) < 100) {
         return true;
       }
@@ -56,6 +57,7 @@ class Pista {
         Sueno();
       }
       TiempoRestante =int(Pelicula.duration() - Pelicula.time());
+      TiempoPista = int(Pelicula.duration());
       if (TiempoRestante == 0) {
         VideoCompleto = false;
         return true;

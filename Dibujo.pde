@@ -10,6 +10,8 @@ void Fondo() {
     img.resize(int(Ancho), int(Alto));
     background(img);
   }
+  fill(255, 0, 0);
+  rect(0.719*Ancho, 0.14*Alto, 0.279*Ancho, 0.005*Alto);
 }
 
 void DibujarGenero() {
@@ -47,9 +49,7 @@ void DibujarPortada(float Tamano, float X, float Y, String Direcion) {
 
 void DibujarAlbunes() {
 
-  println("Directorioalbun "+AlbunActual.DirecionImagen);
   DibujarPortada(0.335, 0.0308, 0.468, AlbunActual.DirecionImagen);
-  
 
   float AnchoAlbunes = Alto*0.525;
   float AnchoCelda = AnchoAlbunes*(0.1);
@@ -90,6 +90,7 @@ void DibujarAlbunes() {
 }
 
 void DibujarLista() {
+
   float AnchoAlbunes = Alto*0.52;
   float AnchoCelda = AnchoAlbunes/10;
   float AnchoCel = Ancho*0.275;
@@ -126,6 +127,7 @@ void DibujarPistas() {
   textAlign(LEFT, TOP);
   fill(231);
   translate( Ancho*0.476, Alto * 0.455);
+  noStroke();
   rect(0, 0, AnchoAlbun, AnchoAlbunes);
   fill(0);
   if (PunteroActual.Pista >= PunteroMenu.Pista +10 ) {
@@ -205,4 +207,21 @@ void Sueno() {
     //println( "Tiempo :"+( millis() - TiempoPasado));
     VideoCompleto = true;
   }
+}
+
+void DibujarBarraReproducion() {
+  pushStyle();
+  pushMatrix();
+  if (!VideoCompleto) {
+    float AnchoBarra = 0.279*Ancho;
+    if (TiempoPasado > 0 && TiempoPista > 0) {
+      if (ColaPista.size()> 0) {
+        float AnchoActual = map( TiempoRestante, 0, TiempoPista, AnchoBarra, 0);
+        fill(200, 200, 0);
+        rect(0.719*Ancho, 0.14*Alto, AnchoActual, 0.005*Alto);
+      }
+    }
+  }
+  popMatrix();
+  popStyle();
 }

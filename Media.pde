@@ -1,5 +1,5 @@
 boolean CambiarPista() {
-  if (ColaPista.size() > 0) {
+ if (ColaPista.size() > 0) {
     Pista PistaActual = ColaPista.get(0);
     //println("Cantidad Falta "+ColaPista.size());
     if (!PistaActual.Reproduciendo) {
