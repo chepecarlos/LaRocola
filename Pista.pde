@@ -56,7 +56,7 @@ class Pista {
         Sueno();
       }
       TiempoRestante =int(Pelicula.duration() - Pelicula.time());
-      if (abs( Pelicula.duration() - Pelicula.time()) < 5) {
+      if (TiempoRestante == 0) {
         VideoCompleto = false;
         return true;
       }

@@ -1,4 +1,4 @@
-void CambiarPista() {
+boolean CambiarPista() {
   if (ColaPista.size() > 0) {
     Pista PistaActual = ColaPista.get(0);
     //println("Cantidad Falta "+ColaPista.size());
@@ -8,8 +8,10 @@ void CambiarPista() {
       println("Quitar Pista");
       ColaPista.get(0).Reproduciendo = false;
       ColaPista.remove(0);
+      return true;
     } else {
       //println("Falta: "+PistaActual.TiempoFalta());
     }
   }
+  return false;
 }

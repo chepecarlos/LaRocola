@@ -13,13 +13,13 @@ void Fondo() {
 }
 
 void DibujarGenero() {
-  float Posixion;
-  Posixion = mouseX/Ancho;
-  if (Posixion< 0.001) {
-    Posixion = 1;
-  }
-  println("I:"+PunteroActual.Genero+" P:"+Posixion);
-  
+  //float Posixion;
+  //Posixion = mouseX/Ancho;
+  //if (Posixion< 0.001) {
+  //  Posixion = 1;
+  //}
+  //println("I:"+PunteroActual.Genero+" P:"+Posixion);
+
   if (PunteroActual.Genero - 2 >= 0) {
     DibujarPortada(0.213, 0.043, 0.173, BibliotecaPista.get(PunteroActual.Genero-2).DirecionImagen);
   }
@@ -38,7 +38,6 @@ void DibujarGenero() {
 }
 
 void DibujarPortada(float Tamano, float X, float Y, String Direcion) {
-
   PImage ImgPortada;
   ImgPortada = loadImage(Direcion);
   ImgPortada.resize(int(Tamano*Alto), int(Tamano*0.88*Alto));
@@ -47,6 +46,11 @@ void DibujarPortada(float Tamano, float X, float Y, String Direcion) {
 
 
 void DibujarAlbunes() {
+
+  println("Directorioalbun "+AlbunActual.DirecionImagen);
+  DibujarPortada(0.335, 0.0308, 0.468, AlbunActual.DirecionImagen);
+  
+
   float AnchoAlbunes = Alto*0.525;
   float AnchoCelda = AnchoAlbunes*(0.1);
   int TamanoFunte = int(AnchoCelda - AnchoCelda/10);

@@ -1,5 +1,5 @@
 //Variable para poner el sistema en pantalla Completa o ventana redimencionable
-boolean PantallaCompleta = true;
+boolean PantallaCompleta = false;
 
 //Vercion del sistema 
 String Vercion = "0.0.2";
@@ -18,6 +18,7 @@ float Ancho;
 float Alto;
 //Cuanto fondos hay 
 float Saldo = 0;
+float SaldoAnterior = -1;
 
 int EstadoReproducion = 0;
 
@@ -45,17 +46,22 @@ void setup() {
 }
 
 void draw() {
-  Fondo();
-  if (BibliotecaPista.size() > 0) {
-    if (!VideoCompleto) {
-      DibujarAlbunes();
-      DibujarPistas();
-      DibujarLista();
-      DibujarVercion();
-      CantidadCreditos();
-      DibujarGenero();
+
+  if (PunteroActual.Diferente(PunteroAnterior) || Saldo != SaldoAnterior || CambiarPista() ) {
+    SaldoAnterior = Saldo;
+    PunteroAnterior.Asignar(PunteroActual);
+    Fondo();
+    if (BibliotecaPista.size() > 0) {
+      if (!VideoCompleto) {
+        DibujarAlbunes();
+        DibujarPistas();
+        DibujarLista();
+        DibujarVercion();
+        CantidadCreditos();
+        DibujarGenero();
+      }
     }
-    CambiarPista();
   }
-  //Sueno();
+  CambiarPista();
+  //println(frameRate);
 }
