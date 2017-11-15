@@ -29,7 +29,7 @@ void keyReleased() {
   } else if (key == 'd' || key == 'D') {
     SubirVolumen();
   } else if (key == 'c' || key == 'C') {
-    BajarVolume();
+    BajarVolumen();
   } else if (Saldo > 0) {
     switch(keyCode) {
     case UP:
@@ -213,12 +213,14 @@ void SubirGenero() {
   }
 }
 
-
 void SubirVolumen() {
-  String[] Opciones = {"amixer", "-D", "pulse", "sset", "Master", "5%+"};
+  String[] Comando = {"amixer", "-D", "pulse", "sset", "Master", "5%+"};
   println("Subir Volumen");
-  exec(Opciones);
+  exec(Comando);
 }
 
 void BajarVolumen() {
+  String[] Comando = {"amixer", "-D", "pulse", "sset", "Master", "5%-"};
+  println("Bajar Volumen");
+  exec(Comando);
 }
