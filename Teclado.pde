@@ -11,6 +11,8 @@ import java.io.*;
  * LEFT o X -> Bajar Albun
  * PgUp o f -> Subir Genero
  * PGDn o V -> Bajar Genero 
+ * D -> Subir Volumen
+ * C -> Bajar Volumen 
  * o -> Actualizar Git
  * p -> Apagar PC
  */
@@ -24,6 +26,10 @@ void keyReleased() {
     ActualizarSaldo(0.25);
   } else if (key == 'e' || key == 'E') {
     ActualizarSaldo(1);
+  } else if (key == 'd' || key == 'D') {
+    SubirVolumen();
+  } else if (key == 'c' || key == 'C') {
+    BajarVolume();
   } else if (Saldo > 0) {
     switch(keyCode) {
     case UP:
@@ -205,4 +211,14 @@ void SubirGenero() {
     PunteroMenu.Pista = 0;
     println("Genero Actual "+PunteroActual.Genero+":"+GeneroActual.NombreGenero);
   }
+}
+
+
+void SubirVolumen() {
+  String[] Opciones = {"amixer", "-D", "pulse", "sset", "Master", "5%+"};
+  println("Subir Volumen");
+  exec(Opciones);
+}
+
+void BajarVolumen() {
 }
