@@ -5,18 +5,20 @@ void Fondo() {
   Ancho =  width;
   Alto = height;
   if (!VideoCompleto) {
-    img = loadImage("FONDO-ROKOLA.png");
+    //img = loadImage("FONDO-ROKOLA.png");
     //img = loadImage("fondo.png");
-    img.resize(int(Ancho), int(Alto));
-    background(img);
+    //img.resize(int(Ancho), int(Alto));
+    //background(img);
+    background(0, 255, 0);
   }
-  fill(255, 0, 0);
-  rect(0.719*Ancho, 0.14*Alto, 0.279*Ancho, 0.005*Alto);
 }
 
 void DibujarGenero() {
- 
-  
+  PImage ImgGenero;
+  ImgGenero = loadImage("Genero.png");
+  ImgGenero.resize(int(0.7151041667*Ancho), int(0.4324074074*Alto));
+  image(ImgGenero, 0, 0);
+
   if (PunteroActual.Genero - 2 >= 0) {
     DibujarPortada(0.10, 0.043, 0.173, BibliotecaPista.get(PunteroActual.Genero-2).DirecionImagen);
   }
@@ -44,15 +46,20 @@ void DibujarPortada(float Tamano, float X, float Y, String Direcion) {
 }
 
 
-void DibujarAlbunes() {
- float Posixion;
+void DibujarAlbun() {
+  float Posixion;
   Posixion = mouseX/Ancho;
   if ( Posixion < 0.001) {
     Posixion = 1;
   }
   println("I:"+PunteroActual.Genero+" P:"+Posixion);
 
-  DibujarPortada(0.1658 , 0.0308, 0.468, AlbunActual.DirecionImagen);
+
+  PImage ImgArtista;
+  ImgArtista = loadImage("Artista.png");
+  ImgArtista.resize(int(0.2348958333*Ancho), int(0.5638888889*Alto));
+
+  DibujarPortada(0.1658, 0.0308, 0.468, AlbunActual.DirecionImagen);
   float AnchoAlbunes = Alto*0.525;
   float AnchoCelda = AnchoAlbunes*(0.1);
   int TamanoFunte = int(AnchoCelda - AnchoCelda/10);
@@ -61,6 +68,8 @@ void DibujarAlbunes() {
   textSize(TamanoFunte);
   textAlign(LEFT, TOP);
   translate( Ancho*(0.23), Alto - AnchoAlbunes- Alto*0.03);
+  image(ImgArtista, 0, 0);
+
   fill(0);
   if (PunteroActual.Albun >= PunteroMenu.Albun +10 ) {
     PunteroMenu.Albun++;
@@ -92,7 +101,12 @@ void DibujarAlbunes() {
 }
 
 void DibujarLista() {
-
+  PImage ImgLista;
+  ImgLista = loadImage("Lista.png");
+  ImgLista.resize(int(0.2796875*Ancho), int(0.95*Alto));
+  image(ImgLista, 0.7203125*Ancho, 0.0314814815*Alto);
+  fill(255, 0, 0);
+  rect(0.7203125*Ancho, 0.14*Alto, 0.279*Ancho, 0.005*Alto);
   float AnchoAlbunes = Alto*0.52;
   float AnchoCelda = AnchoAlbunes/10;
   float AnchoCel = Ancho*0.275;
@@ -175,6 +189,11 @@ void CantidadCreditos() {
   int TamanoFunte = int(Alto/20);
   textFont(FuenteIndice);
   pushMatrix();
+  PImage FondoSaldo;
+  FondoSaldo = loadImage("Saldo.png");
+  FondoSaldo.resize(int(0.2296875*Ancho), int(0.0685185185*Alto));
+  image(FondoSaldo, 0, 0.93148148*Alto);
+  //img.resize(int(Ancho), int(Alto));
   textSize(TamanoFunte);
   textAlign(LEFT, TOP);
   translate( 0, Alto- Alto/15-Alto/60);

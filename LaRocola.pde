@@ -5,6 +5,7 @@ boolean PantallaCompleta = true;
 String Vercion = "0.0.3";
 
 boolean VideoCompleto = false;
+boolean VideoCompletoPasado = true;
 float TiempoPasado  = 0;
 //Tiempo para que termine la pista
 int TiempoRestante = 0;
@@ -42,8 +43,6 @@ void setup() {
 
   minim = new Minim(this);
 
-  //CargarAlbun("/home/chepecarlos/Musica");
-
   CargarBiblioteca("/home/chepecarlos/Musica");
 
   Ancho =  width;
@@ -51,28 +50,55 @@ void setup() {
 }
 
 void draw() {
-  if (PunteroActual.Diferente(PunteroAnterior) || 
-    Saldo != SaldoAnterior ||
-    CambiarPista() ||
-    ColaAnterior != ColaPista.size() ) {
-    SaldoAnterior = Saldo;
-    PunteroAnterior.Asignar(PunteroActual);
-    ColaAnterior = ColaPista.size();
+
+  if (VideoCompletoPasado != VideoCompleto) {
+    println("Dibujar Fondo");
+    VideoCompletoPasado = VideoCompleto;
     Fondo();
+    DibujarVercion();
+  }
+
+
+  if ( CambiarPista() ||
+    ColaAnterior != ColaPista.size() ) {
     if (BibliotecaPista.size() > 0) {
       println("Dibujar GUI");
       if (!VideoCompleto) {
-        DibujarAlbunes();
-        DibujarPistas();
-        DibujarLista();
-        DibujarVercion();
-        CantidadCreditos();
         DibujarGenero();
       }
     }
   }
-  DibujarBarraReproducion();
+  if (BibliotecaPista.size() > 0) {
+    if (!VideoCompleto) {
+      if (ColaAnterior != ColaPista.size()) {
+        ColaAnterior = ColaPista.size();
+        DibujarLista();
+      }
+      if (PunteroActual.Genero != PunteroAnterior.Genero) {
+        PunteroAnterior.Genero = PunteroActual.Genero;
+        PunteroAnterior.Albun = PunteroActual.Albun;
+        PunteroAnterior.Pista = PunteroActual.Pista;
+        DibujarGenero();
+        DibujarAlbun();
+        DibujarPistas();
+      } else if (PunteroActual.Albun != PunteroAnterior.Albun) {
+        PunteroAnterior.Albun = PunteroActual.Albun;
+        PunteroAnterior.Pista = PunteroActual.Pista;
+        DibujarAlbun();
+        DibujarPistas();
+      } else if (PunteroActual.Pista != PunteroAnterior.Pista) {
+        PunteroAnterior.Pista = PunteroActual.Pista;
+        DibujarPistas();
+      }
+    }
+  }
+  
+  if (Saldo != SaldoAnterior) {
+    SaldoAnterior = Saldo;
+    CantidadCreditos();
+  }
 
+  DibujarBarraReproducion();
   CambiarPista();
   //println(frameRate);
 }
