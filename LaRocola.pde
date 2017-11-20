@@ -37,8 +37,10 @@ void setup() {
   FuenteAlbun  = createFont("Ubuntu-L.ttf", 100);
 
   minim = new Minim(this);
+  
   CargarConfiguracion();
   CargarBiblioteca(RutaPista);
+  CargarDriver(RutaDriver);
 
   Ancho =  width;
   Alto = height;

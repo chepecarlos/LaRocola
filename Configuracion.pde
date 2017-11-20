@@ -1,9 +1,11 @@
 
 //Direcion de la musica
 String RutaPista;
+//Drivercion 
+String RutaDriver;
 //Nombre de 
 String NombrePortada;
-
+//Nombre
 
 Table Configuracion;
 
@@ -18,6 +20,9 @@ void CargarConfiguracion () {
     }
     if (Celda.getString("Informacion").equals("NombreCaratula")) {
       NombrePortada = Celda.getString("Dato");
+    }
+    if(Celda.getString("Informacion").equals("CarpetaDriver")) {
+      RutaDriver = Celda.getString("Dato");
     }
   }
 }
