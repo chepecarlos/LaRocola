@@ -5,15 +5,15 @@ void Fondo() {
   Ancho =  width;
   Alto = height;
   if (!VideoCompleto) {
-    //img = loadImage("FONDO-ROKOLA.png");
+    img = loadImage("FONDO-ROKOLA.png");
     //img = loadImage("fondo.png");
-    //img.resize(int(Ancho), int(Alto));
-    //background(img);
-    background(0, 255, 0);
+    img.resize(int(Ancho), int(Alto));
+    background(img);
+    //background(0, 255, 0);
   }
 }
 
-void DibujarGenero() {
+void DibujarGenero(){
   PImage ImgGenero;
   ImgGenero = loadImage("Genero.png");
   ImgGenero.resize(int(0.7151041667*Ancho), int(0.4324074074*Alto));
@@ -32,8 +32,15 @@ void DibujarGenero() {
     DibujarPortada(0.14, 0.425, 0.13, BibliotecaPista.get(PunteroActual.Genero+1).DirecionImagen);
   }
   DibujarPortada(0.1708, 0.2675, 0.088, BibliotecaPista.get(PunteroActual.Genero).DirecionImagen);
+  fill(255);
   textAlign(CENTER);
+  int TamanoFunte = int(Ancho/40);
+  textSize(TamanoFunte);
   text(BibliotecaPista.get(PunteroActual.Genero).NombreGenero, 0.356*Ancho, 0.07*Alto);
+  TamanoFunte = int(Ancho/90);
+  textSize(TamanoFunte);
+  text(BibliotecaPista.get(PunteroActual.Genero).CantidadArtista+" Artista", 0.315*Ancho, 0.411*Alto);
+  text(BibliotecaPista.get(PunteroActual.Genero).CantidadCanciones+" Canciones", 0.3975*Ancho, 0.411*Alto);
 }
 
 void DibujarPortada(float Tamano, float X, float Y, String Direcion) {
@@ -41,19 +48,13 @@ void DibujarPortada(float Tamano, float X, float Y, String Direcion) {
   ImgPortada = loadImage(Direcion);
   float AnchoImagen = Tamano*Ancho;
   float AltoImagen = (AnchoImagen*ImgPortada.pixelHeight)/ImgPortada.pixelWidth;
+  //imageMode(CENTER);
   ImgPortada.resize(int(AnchoImagen), int(AltoImagen));
   image(ImgPortada, X*Ancho, Y*Alto);
+  //imageMode(CORNER);
 }
 
-
 void DibujarAlbun() {
-  float Posixion;
-  Posixion = mouseX/Ancho;
-  if ( Posixion < 0.001) {
-    Posixion = 1;
-  }
-  println("I:"+PunteroActual.Genero+" P:"+Posixion);
-
 
   PImage ImgArtista;
   ImgArtista = loadImage("Artista.png");
@@ -92,7 +93,7 @@ void DibujarAlbun() {
     }
     text(" "+NombreAlbun, 0, AnchoCelda*i);
     Indice++;
-    if (Indice >= GeneroActual.CantidadAlbunes ) {
+    if (Indice >= GeneroActual.CantidadArtista ) {
       popMatrix();
       return;
     }
@@ -183,7 +184,6 @@ void DibujarVolumen() {
   fill(255);
   text("Volumen: "+int(Volumen), Ancho- 380, 50);
 }
-
 
 void CantidadCreditos() {
   int TamanoFunte = int(Alto/20);

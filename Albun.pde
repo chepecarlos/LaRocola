@@ -1,5 +1,4 @@
 ArrayList<Genero> BibliotecaPista = new ArrayList<Genero>(); //<>//
-
 ArrayList<Pista> ColaPista = new ArrayList<Pista>();
 
 Genero GeneroActual;
@@ -41,7 +40,7 @@ class Albun {
       boolean EsPista = false;
       File Pista = ListaArchivos[i]; 
       if (!Pista.isDirectory()) {
-        if (Pista.getName().equals("caratula.jpg")) {
+        if (Pista.getName().equals(NombrePortada)) {
           println("---Caratula-"+Pista.getAbsolutePath());
           this.DirecionImagen = Pista.getAbsolutePath();
         } else {
@@ -60,7 +59,7 @@ class Albun {
             EsPista = true;
             break;
           default:
-            EsPista= false;
+            EsPista = false;
             break;
           }
           if (EsPista) {
@@ -73,7 +72,7 @@ class Albun {
       }
     }
     if (this.DirecionImagen == null) {
-      this.DirecionImagen = "Caratula.jpg";
+      this.DirecionImagen = NombrePortada;
     }
   }
 }
@@ -92,8 +91,12 @@ void CargarBiblioteca(String Direcion) {
           if (FolderArtista[j].isDirectory()) {
             println("-Artista="+j+" "+FolderArtista[j].getName());
             Albun ArtistaTMP = new Albun(FolderArtista[j].getName(), Direcion+"/"+FolderGenero[i].getName()+"/"+FolderArtista[j].getName());
-            GeneroTMP.add(ArtistaTMP);
-          } else if (FolderArtista[j].getName().equals("caratula.jpg")) {
+            if (ArtistaTMP.CantidadPistas > 0) {
+              GeneroTMP.add(ArtistaTMP);
+            } else {
+              println("Elininar Artista "+ArtistaTMP.NombreAlbun);
+            }
+          } else if (FolderArtista[j].getName().equals(NombrePortada)) {
             println("--Caratula-"+FolderArtista[j].getAbsolutePath());      
             GeneroTMP.DirecionImagen = FolderArtista[j].getAbsolutePath();
           } else {
@@ -101,11 +104,18 @@ void CargarBiblioteca(String Direcion) {
           }
         }
         if (GeneroTMP.DirecionImagen == null) {
-          GeneroTMP.DirecionImagen = "Caratula.jpg";
+          GeneroTMP.DirecionImagen = NombrePortada;
         }
         BibliotecaPista.add(GeneroTMP);
       }
     }
+    for (int i = BibliotecaPista.size()-1; i > 0; i--) {
+      if (BibliotecaPista.get(i).CantidadArtista == 0) {
+        println("Eliminar Genero "+BibliotecaPista.get(i).NombreGenero);
+        BibliotecaPista.remove(i);
+      }
+    };
+
     GeneroActual = BibliotecaPista.get(0);
     AlbunActual = GeneroActual.get(0);
     PistaActual = AlbunActual.get(0);

@@ -1,5 +1,6 @@
 class Genero {
-  int CantidadAlbunes;
+  int CantidadArtista;
+  int CantidadCanciones;
   String NombreGenero;
   String DirecionGenero  = null;
   String DirecionImagen;
@@ -8,11 +9,13 @@ class Genero {
   Genero(String Genero, String Direcion) {
     NombreGenero = Genero;
     DirecionGenero = Direcion;
-    CantidadAlbunes = 0;
+    CantidadArtista = 0;
+    CantidadCanciones = 0;
   }
 
   void add(Albun AlbunAcual) {
-    CantidadAlbunes++;
+    CantidadArtista++;
+    CantidadCanciones += AlbunAcual.CantidadPistas;
     ListaAlbunes.add(AlbunAcual);
   }
 

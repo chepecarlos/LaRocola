@@ -166,7 +166,7 @@ void BajarPista() {
 }
 
 void SubirAlbun() {
-  if (PunteroActual.Albun + 1 < GeneroActual.CantidadAlbunes ) {
+  if (PunteroActual.Albun + 1 < GeneroActual.CantidadCanciones ) {
     PunteroActual.Albun++;
     AlbunActual = GeneroActual.get(PunteroActual.Albun);
     PunteroActual.Pista = 0;
@@ -186,7 +186,6 @@ void BajarAlbun() {
 }
 
 void BajarGenero() {
-  println("Bajando Genero");
   if (PunteroActual.Genero > 0) {
     PunteroActual.Genero--; 
     GeneroActual = BibliotecaPista.get(PunteroActual.Genero);
@@ -200,14 +199,13 @@ void BajarGenero() {
 }
 
 void SubirGenero() {
-  println("Alto Genero");
-  if (PunteroActual.Genero  + 1 < BibliotecaPista.size()) {
+  if (PunteroActual.Genero < BibliotecaPista.size() - 1) {
     PunteroActual.Genero++; 
     GeneroActual = BibliotecaPista.get(PunteroActual.Genero);
     PunteroActual.Albun = 0;
+    PunteroMenu.Albun = 0;
     AlbunActual = GeneroActual.get(PunteroActual.Albun);
     PunteroActual.Pista = 0;
-    PunteroMenu.Albun = 0;
     PunteroMenu.Pista = 0;
     println("Genero Actual "+PunteroActual.Genero+":"+GeneroActual.NombreGenero);
   }

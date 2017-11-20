@@ -12,10 +12,7 @@ int TiempoRestante = 0;
 int TiempoPista = 0;
 int ColaAnterior = 0;
 
-//Direcion de la musica
-String RutaCanciones;
-
-float  Volumen = 50;
+float  Volumen = 70;
 //Tamaño de la pantalla
 float Ancho;
 float Alto;
@@ -39,11 +36,9 @@ void setup() {
   FuenteIndice =  createFont("Anton.ttf", 100);
   FuenteAlbun  = createFont("Ubuntu-L.ttf", 100);
 
-  RutaCanciones = sketchPath()+"/data";
-
   minim = new Minim(this);
-
-  CargarBiblioteca("/home/chepecarlos/Musica");
+  CargarConfiguracion();
+  CargarBiblioteca(RutaPista);
 
   Ancho =  width;
   Alto = height;
@@ -51,26 +46,23 @@ void setup() {
 
 void draw() {
 
+  if (BibliotecaPista.size() > 0) {
+    //DibujarGenero();
+  }
+
   if (VideoCompletoPasado != VideoCompleto) {
     println("Dibujar Fondo");
     VideoCompletoPasado = VideoCompleto;
     Fondo();
     DibujarVercion();
+    DibujarGenero();
+    DibujarAlbun();
+    DibujarPistas();
   }
 
-
-  if ( CambiarPista() ||
-    ColaAnterior != ColaPista.size() ) {
-    if (BibliotecaPista.size() > 0) {
-      println("Dibujar GUI");
-      if (!VideoCompleto) {
-        DibujarGenero();
-      }
-    }
-  }
   if (BibliotecaPista.size() > 0) {
     if (!VideoCompleto) {
-      if (ColaAnterior != ColaPista.size()) {
+      if (ColaAnterior != ColaPista.size() ||  CambiarPista()) {
         ColaAnterior = ColaPista.size();
         DibujarLista();
       }
@@ -92,7 +84,7 @@ void draw() {
       }
     }
   }
-  
+
   if (Saldo != SaldoAnterior) {
     SaldoAnterior = Saldo;
     CantidadCreditos();
