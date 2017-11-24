@@ -1,7 +1,4 @@
-ArrayList<Genero> BibliotecaPista = new ArrayList<Genero>(); //<>//
-ArrayList<Pista> ColaPista = new ArrayList<Pista>();
-
-Genero GeneroActual;
+Genero GeneroActual; //<>//
 Albun AlbunActual;
 Pista PistaActual;
 

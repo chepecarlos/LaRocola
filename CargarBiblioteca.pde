@@ -1,3 +1,5 @@
+ArrayList<Genero> BibliotecaPista = new ArrayList<Genero>();
+ArrayList<Pista> ColaPista = new ArrayList<Pista>();
 
 void CargarDriver(String Direcion) {
   File Folder = new File(Direcion);
